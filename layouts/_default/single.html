@@ -1,0 +1,23 @@
+{{ define "main" }}
+<article class="article-page{{ if eq .Section "poetry" }} article-poetry{{ end }}">
+  <div class="container">
+    <header class="article-header">
+      <h1 class="article-page-title">{{ .Title }}</h1>
+      {{ if or .Params.author (not .Date.IsZero) }}
+      <div class="article-meta">
+        {{ with .Params.author }}<span class="article-author">{{ . }}</span>{{ end }}
+        {{ if not .Date.IsZero }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006年1月2日" }}</time>{{ end }}
+      </div>
+      {{ end }}
+    </header>
+    <div class="article-content">
+      {{ .Content }}
+    </div>
+    {{ if and .Parent .Parent.IsSection }}
+    <footer class="article-footer">
+      <a href="{{ .Parent.RelPermalink }}" class="back-link">← 返回{{ .Parent.Title }}</a>
+    </footer>
+    {{ end }}
+  </div>
+</article>
+{{ end }}
