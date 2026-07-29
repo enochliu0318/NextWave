@@ -33,6 +33,16 @@ pygmentsUseClasses = true
   url = "/about/"
   weight = 5
 
+[outputFormats]
+  [outputFormats.SEARCH_INDEX]
+    mediaType = "application/json"
+    baseName = "search-index"
+    isPlainText = true
+    notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "SEARCH_INDEX"]
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
