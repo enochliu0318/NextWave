@@ -1,12 +1,12 @@
 ---
 title: "搜索"
-layout: "search"
+layout: "single"
 ---
 
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 
-<div id="search"></div>
+<div id="搜索"></div>
 
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
