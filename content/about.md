@@ -2,7 +2,16 @@
 title: "关于后浪"
 ---
 
-**后浪 NextWave** 是一个面向青少年的文学发表平台。
+**后浪 NextWave** 是一个专为青少年打造的文学阅读与创作表达平台。
 
-我们相信，每一代年轻人都有自己的声音。诗歌、散文、小说、论文——无论形式如何，都值得被阅读、被记住。
+我们相信，每一代年轻人都有属于自己的独特声音，无论探讨何种主题，都值得被真诚聆听与记录。我们也坚信，青少年的成长离不开属灵长辈的关怀与引导，那些温暖而有力量的劝勉，将伴随我们笃定前行。
 
+### 后浪团队：
+
+主编 / 审核（Editor-in-Chief & Reviewer）：[Enoch](https://www.instagram.com/enochliu0318)
+
+视觉 / 图文排版师（Typesetter & Graphic Designer）：[Enoch](https://www.instagram.com/enochliu0318)
+
+网站运维 / 开发（Webmaster / Developer）：[Enoch](https://www.instagram.com/enochliu0318)
+
+*“一个人可以走得很快，但一群人可以走得很远。”* 亲爱的同学们，如果你也热爱文字，欢迎加入后浪团队，一起用文字见证成长。
