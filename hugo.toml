@@ -36,6 +36,11 @@ pygmentsUseClasses = true
   url = "/non-fiction/"
   weight = 5
 
+[[menu.main]]
+  name = "投稿"
+  url = "/submit/"
+  weight = 6
+
 #[[menu.main]]
 #  name = "搜索"
 #  url = "/search/"
