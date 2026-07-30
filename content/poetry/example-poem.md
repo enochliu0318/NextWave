@@ -2,7 +2,7 @@
 title: "夏夜"
 author: "林晓"
 date: 2026-07-15
-draft: false
+draft: true
 description: "一个关于夏夜与星光的短诗。"
 ---
 

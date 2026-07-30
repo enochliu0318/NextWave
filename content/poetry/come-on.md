@@ -3,7 +3,7 @@ title: "加油"
 author: "Esther Shi"
 date: 2026-07-30T08:01:57+08:00
 draft: false
-description: "加油吧！"
+description: "记录成长脚步，鼓励各年龄段勇于探索真理。"
 ---
 
 成功——
