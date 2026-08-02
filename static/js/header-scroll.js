@@ -6,7 +6,7 @@
   var nav = document.querySelector(".site-nav");
   if (!header || !toggleBtn || !nav) return;
 
-  var COMPACT_THRESHOLD = 48; // 滚动超过该像素值后进入紧凑态 / 触发自动收起
+  var COMPACT_THRESHOLD = 24; // 滚动超过该像素值后进入紧凑态 / 触发自动收起
   var mobileQuery = window.matchMedia("(max-width: 640px)");
   var ticking = false;
 
