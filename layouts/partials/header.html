@@ -1,14 +1,21 @@
 <header class="site-header">
   <div class="container header-inner">
-    <a href="{{ "/" | relURL }}" class="site-brand">
-      <span class="site-name">后浪</span>
-      <span class="site-name-en">NextWave</span>
-    </a>
-    <nav class="site-nav">
+    <div class="header-top">
+      <a href="{{ "/" | relURL }}" class="site-brand">
+        <span class="site-name">后浪</span>
+        <span class="site-name-en">NextWave</span>
+      </a>
+      <button type="button" class="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="打开导航菜单">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </div>
+    <nav class="site-nav" id="site-nav">
       {{ range .Site.Menus.main }}
       <a href="{{ .URL | relURL }}" class="nav-link{{ if $.IsMenuCurrent "main" . }} active{{ end }}">{{ .Name }}</a>
       {{ end }}
-      
+
     </nav>
   </div>
 </header>

@@ -80,25 +80,78 @@ body {
   text-decoration: none;
   color: var(--color-text);
   display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
   flex-shrink: 0;
 }
 
 .site-name {
   font-size: 1.5rem;
   font-weight: 700;
+  line-height: 1.2;
   background: var(--color-accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  transition: font-size var(--transition);
 }
 
 .site-name-en {
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
+  line-height: 1;
   color: var(--color-text-muted);
   letter-spacing: 0.05em;
+  transition: font-size var(--transition);
+}
+
+/* 桌面端：header-top 不作为独立盒子，其子元素（品牌区、汉堡按钮）
+   直接参与 header-inner 的水平布局，视觉效果与原来一致 */
+.header-top {
+  display: contents;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+
+.nav-toggle:hover {
+  background: var(--color-accent-light);
+}
+
+.nav-toggle-bar {
+  display: block;
+  width: 1.375rem;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 1px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.site-header.is-nav-open .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.site-header.is-nav-open .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.site-header.is-nav-open .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .site-nav {
@@ -531,32 +584,49 @@ body {
     transition: padding var(--transition);
   }
 
-  .site-nav {
+  /* 品牌区 + 汉堡按钮的横向行，仅在移动端拆分为独立盒子 */
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    max-height: 200px;
-    overflow: hidden;
-    transition: max-height var(--transition), opacity var(--transition), margin var(--transition);
   }
 
-  /* 滚动超过阈值后进入紧凑态：缩小内边距、隐藏副标题与导航链接 */
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  /* 导航菜单默认收起，仅在 .is-nav-open 状态下展开
+     该状态由汉堡按钮点击，或滚动逻辑（下滑收起/回顶部展开）共同控制 */
+  .site-nav {
+    width: 100%;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0;
+    pointer-events: none;
+    transition: max-height var(--transition), opacity var(--transition), margin-top var(--transition);
+  }
+
+  .site-header.is-nav-open .site-nav {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 0.75rem;
+    pointer-events: auto;
+  }
+
+  /* 滚动超过阈值后进入紧凑态：缩小内边距与标题字号，副标题保留但字号略微收缩 */
   .site-header.is-compact .header-inner {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-  }
-
-  .site-header.is-compact .site-name-en {
-    display: none;
   }
 
   .site-header.is-compact .site-name {
     font-size: 1.25rem;
   }
 
-  .site-header.is-compact .site-nav {
-    max-height: 0;
-    opacity: 0;
-    margin-top: 0;
-    pointer-events: none;
+  .site-header.is-compact .site-name-en {
+    font-size: 0.6875rem;
   }
 
   .hero-title {
