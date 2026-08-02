@@ -528,10 +528,35 @@ body {
   .header-inner {
     flex-direction: column;
     align-items: flex-start;
+    transition: padding var(--transition);
   }
 
   .site-nav {
     width: 100%;
+    max-height: 200px;
+    overflow: hidden;
+    transition: max-height var(--transition), opacity var(--transition), margin var(--transition);
+  }
+
+  /* 滚动超过阈值后进入紧凑态：缩小内边距、隐藏副标题与导航链接 */
+  .site-header.is-compact .header-inner {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .site-header.is-compact .site-name-en {
+    display: none;
+  }
+
+  .site-header.is-compact .site-name {
+    font-size: 1.25rem;
+  }
+
+  .site-header.is-compact .site-nav {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    pointer-events: none;
   }
 
   .hero-title {
