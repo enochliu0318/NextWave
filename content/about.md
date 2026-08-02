@@ -8,10 +8,10 @@ title: "关于后浪"
 
 ### 后浪团队：
 
-主编 / 审核（Editor & Reviewer）：[Enoch](https://www.instagram.com/enochliu0318)
+主编 / 审核：[Enoch](enochliu0318@gmail.com)
 
-视觉 / 排版（Typesetter & Designer）：[Enoch](https://www.instagram.com/enochliu0318)
+视觉 / 排版：[Enoch](enochliu0318@gmail.com)
 
-运维 / 开发（Webmaster / Developer）：[Enoch](https://www.instagram.com/enochliu0318)
+运维 / 开发：[Enoch](enochliu0318@gmail.com)
 
 *“一个人可以走得很快，但一群人可以走得很远。”* 亲爱的同学们，如果你也热爱文字，欢迎加入后浪团队，一起用文字见证成长。
