@@ -18,6 +18,9 @@
       <a href="{{ .Parent.RelPermalink }}" class="back-link">← 返回{{ .Parent.Title }}</a>
     </footer>
     {{ end }}
+    {{ if in (slice "poetry" "fiction" "prose" "non-fiction") .Section }}
+    {{ partial "comments.html" . }}
+    {{ end }}
   </div>
 </article>
 {{ end }}
