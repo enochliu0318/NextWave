@@ -10,8 +10,8 @@ title: "关于后浪"
 
 主编 / 审核：[Enoch](mailto:enochliu0318@gmail.com)
 
-视觉 / 排版：[Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany]()
+视觉 / 排版：[Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany](mailto:TiffanyP@126.com)
 
-运维 / 开发：[Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany]()
+运维 / 开发：[Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany](mailto:TiffanyP@126.com)
 
 *“一个人可以走得很快，但一群人可以走得很远。”* 亲爱的同学们，如果你也热爱文字，欢迎加入后浪团队，一起用文字见证成长。
