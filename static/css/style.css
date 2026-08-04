@@ -59,9 +59,9 @@ body {
 
 /* ===== Header ===== */
 .site-header {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.57);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
@@ -687,26 +687,16 @@ html.notice-open {
     transition: padding var(--transition);
   }
 
-  /* 品牌区 + 汉堡按钮的横向行，仅在移动端拆分为独立盒子。
-     采用三栏网格：左侧留白宽度与右侧汉堡按钮宽度相同，
-     从而让中间的品牌区在视觉上真正水平居中，而非贴左显示。 */
+  /* 品牌区 + 汉堡按钮的横向行，仅在移动端拆分为独立盒子。 */
   .header-top {
-    display: grid;
-    grid-template-columns: 2.25rem 1fr 2.25rem;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
-  }
-
-  .header-top .site-brand {
-    grid-column: 2;
-    align-items: center;
-    text-align: center;
   }
 
   .nav-toggle {
     display: inline-flex;
-    grid-column: 3;
-    justify-self: end;
   }
 
   /* 导航菜单默认收起，仅在 .is-nav-open 状态下展开
