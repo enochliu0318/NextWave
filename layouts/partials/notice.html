@@ -1,0 +1,25 @@
+{{/*
+  首页一次性通知弹窗
+  内容维护请编辑 data/notice.yaml（无需改动本文件）。
+  显示逻辑：
+    - 仅在首页渲染
+    - 通过 localStorage 记录已关闭的 version，同一 version 只弹一次
+    - 站长更新 notice.yaml 中的 version 后，所有访客都会重新看到新通知
+*/}}
+{{ $notice := .Site.Data.notice }}
+{{ if and $notice $notice.enabled }}
+{{ $body := strings.TrimSpace $notice.body }}
+{{ $paragraphs := split $body "\n\n" }}
+<div class="notice-overlay" id="notice-overlay" data-notice-version="{{ $notice.version }}" aria-hidden="true">
+  <div class="notice-card" role="dialog" aria-modal="true" aria-labelledby="notice-title">
+    <div class="notice-handle" aria-hidden="true"></div>
+    <h2 class="notice-title" id="notice-title">{{ $notice.title }}</h2>
+    <div class="notice-body">
+      {{ range $paragraphs }}
+      <p>{{ strings.TrimSpace . }}</p>
+      {{ end }}
+    </div>
+    <button type="button" class="notice-confirm" id="notice-confirm">{{ $notice.button_text | default "知道啦" }}</button>
+  </div>
+</div>
+{{ end }}

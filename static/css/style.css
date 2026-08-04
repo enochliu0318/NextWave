@@ -59,9 +59,9 @@ body {
 
 /* ===== Header ===== */
 .site-header {
-  background: rgba(255, 255, 255, 0.57);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
@@ -520,6 +520,104 @@ body {
   margin: 2.5rem auto 0;
 }
 
+/* ===== 首页一次性通知弹窗（iOS 风格） ===== */
+.notice-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(20, 24, 33, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+}
+
+.notice-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.35s ease, visibility 0s linear 0s;
+}
+
+/* 通知弹出时锁定页面滚动 */
+html.notice-open {
+  overflow: hidden;
+}
+
+.notice-card {
+  width: 100%;
+  max-width: 22rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+  padding: 1.75rem 1.5rem 1.5rem;
+  text-align: center;
+  transform: scale(0.9) translateY(8px);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.notice-overlay.is-visible .notice-card {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.notice-handle {
+  display: none;
+}
+
+.notice-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.625rem;
+}
+
+.notice-body p {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+.notice-body p + p {
+  margin-top: 0.75rem;
+}
+
+.notice-confirm {
+  display: block;
+  width: 100%;
+  margin-top: 1.375rem;
+  padding: 0.8125rem 1rem;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-gradient);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.notice-confirm:hover {
+  opacity: 0.92;
+}
+
+.notice-confirm:active {
+  transform: scale(0.96);
+}
+
 /* ===== Footer ===== */
 .site-footer {
   background: var(--color-surface);
@@ -589,16 +687,26 @@ body {
     transition: padding var(--transition);
   }
 
-  /* 品牌区 + 汉堡按钮的横向行，仅在移动端拆分为独立盒子 */
+  /* 品牌区 + 汉堡按钮的横向行，仅在移动端拆分为独立盒子。
+     采用三栏网格：左侧留白宽度与右侧汉堡按钮宽度相同，
+     从而让中间的品牌区在视觉上真正水平居中，而非贴左显示。 */
   .header-top {
-    display: flex;
+    display: grid;
+    grid-template-columns: 2.25rem 1fr 2.25rem;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
+  }
+
+  .header-top .site-brand {
+    grid-column: 2;
+    align-items: center;
+    text-align: center;
   }
 
   .nav-toggle {
     display: inline-flex;
+    grid-column: 3;
+    justify-self: end;
   }
 
   /* 导航菜单默认收起，仅在 .is-nav-open 状态下展开
@@ -654,6 +762,40 @@ body {
 
   .article-page-title {
     font-size: 1.625rem;
+  }
+
+  /* 移动端：通知弹窗改为从底部弹出的动作表（Action Sheet） */
+  .notice-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .notice-card {
+    max-width: none;
+    width: 100%;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: 0.75rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    text-align: left;
+    transform: translateY(100%);
+    box-shadow: 0 -12px 40px rgba(15, 23, 42, 0.2);
+    transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.3s ease;
+  }
+
+  .notice-overlay.is-visible .notice-card {
+    transform: translateY(0);
+  }
+
+  .notice-handle {
+    display: block;
+    width: 2.25rem;
+    height: 0.3125rem;
+    border-radius: 999px;
+    background: var(--color-border);
+    margin: 0 auto 1rem;
+  }
+
+  .notice-title {
+    text-align: left;
   }
 
 
