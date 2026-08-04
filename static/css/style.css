@@ -578,14 +578,14 @@ html.notice-open {
 }
 
 .notice-title {
-  font-size: 1.125rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--color-text);
   margin-bottom: 0.625rem;
 }
 
 .notice-body p {
-  font-size: 0.9375rem;
+  font-size: 1.3rem;
   line-height: 1.65;
   color: var(--color-text-muted);
 }
@@ -603,7 +603,7 @@ html.notice-open {
   border-radius: var(--radius-md);
   background: var(--color-accent-gradient);
   color: #ffffff;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
