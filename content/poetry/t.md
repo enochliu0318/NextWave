@@ -1,7 +1,7 @@
 ---
 title:"T"
 author:"Tiffany"
-date:2026.8.4
+date:2026-8-4
 draft: false
 description:"HI"
 ---
