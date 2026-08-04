@@ -554,7 +554,7 @@ html.notice-open {
 
 .notice-card {
   width: 100%;
-  max-width: 22rem;
+  max-width: 26rem;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -585,7 +585,7 @@ html.notice-open {
 }
 
 .notice-body p {
-  font-size: 1.3rem;
+  font-size: 1.0125rem;
   line-height: 1.65;
   color: var(--color-text-muted);
 }
@@ -603,7 +603,7 @@ html.notice-open {
   border-radius: var(--radius-md);
   background: var(--color-accent-gradient);
   color: #ffffff;
-  font-size: 1.2rem;
+  font-size: 1.125rem;
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
