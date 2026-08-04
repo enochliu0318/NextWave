@@ -8,7 +8,7 @@
 */}}
 {{ $notice := .Site.Data.notice }}
 {{ if and $notice $notice.enabled }}
-{{ $body := strings.TrimSpace $notice.body }}
+{{ $body := trim $notice.body "\r\n\t " }}
 {{ $paragraphs := split $body "\n\n" }}
 <div class="notice-overlay" id="notice-overlay" data-notice-version="{{ $notice.version }}" aria-hidden="true">
   <div class="notice-card" role="dialog" aria-modal="true" aria-labelledby="notice-title">
@@ -16,7 +16,7 @@
     <h2 class="notice-title" id="notice-title">{{ $notice.title }}</h2>
     <div class="notice-body">
       {{ range $paragraphs }}
-      <p>{{ strings.TrimSpace . }}</p>
+      <p>{{ trim . "\r\n\t " }}</p>
       {{ end }}
     </div>
     <button type="button" class="notice-confirm" id="notice-confirm">{{ $notice.button_text | default "知道啦" }}</button>
