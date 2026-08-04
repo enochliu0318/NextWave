@@ -2,7 +2,7 @@
 title: "诗之使，发乎情"
 author: "Enoch Liu"
 date: 2026-07-30T08:29:30+08:00
-draft: ture
+draft: true
 description: "《诗经》赏析"
 ---
 
