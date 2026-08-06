@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{ $i18n := .Site.Data.i18n }}
 <section class="page-header">
   <div class="container">
     <h1 class="page-title">{{ .Title }}</h1>
@@ -30,7 +31,7 @@
       {{ end }}
     </ul>
     {{ else }}
-    <p class="empty-state">暂无文章，敬请期待。</p>
+    <p class="empty-state" data-i18n-en="{{ index $i18n "empty_state" }}">暂无文章，敬请期待。</p>
     {{ end }}
   </div>
 </section>

@@ -1,0 +1,35 @@
+# 站点界面文案的英文翻译词典
+# ------------------------------------------------------------
+# 仅用于「导航栏 / 按钮 / 页脚」等界面文案的中英切换，
+# 文章正文内容不受此文件影响，任何语言下都保持中文原文。
+#
+# 使用方式：访客点击导航栏右侧的 EN/中 按钮时，页面上带有
+# 对应标记的文字会被替换成这里配置的英文；改动这里的值即可
+# 调整显示的英文文案，无需改动模板代码。
+# ------------------------------------------------------------
+
+# 导航菜单
+nav_home: "Home"
+nav_poetry: "Poetry"
+nav_prose: "Prose"
+nav_fiction: "Fiction"
+nav_nonfiction: "Non-fiction"
+nav_submit: "Submit"
+nav_about: "About"
+nav_toggle_label: "Open navigation menu"
+
+# 首页 / 列表页
+read_more: "Read more →"
+back_to_prefix: "← Back to "
+empty_state: "No articles yet — stay tuned."
+
+# 页脚
+footer_built_by: "Built by"
+
+# 首页通知弹窗的默认按钮文案
+# （若 data/notice.yaml 中设置了 button_text_en，会优先使用那个值）
+notice_default_button: "Got it"
+
+# 站点标语 / 简介（首页大标题下方 + 页脚共用）
+site_slogan: "Waves of faith, the voice of youth"
+site_description: "A literary platform for teens — poetry, prose, and fiction that carry the voice of youth."

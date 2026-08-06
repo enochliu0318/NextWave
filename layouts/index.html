@@ -1,9 +1,10 @@
 {{ define "main" }}
+{{ $i18n := .Site.Data.i18n }}
 <section class="hero">
   <div class="container">
     <h1 class="hero-title">后浪</h1>
     <p class="hero-subtitle">NextWave</p>
-    <p class="hero-slogan">{{ .Site.Params.slogan }}</p>
+    <p class="hero-slogan" data-i18n-en="{{ index $i18n "site_slogan" }}">{{ .Site.Params.slogan }}</p>
     {{ with .Content }}
     <div class="hero-intro">{{ . }}</div>
     {{ end }}
@@ -12,6 +13,7 @@
 
 {{ $sections := slice "poetry" "prose" "fiction" "non-fiction" }}
 {{ $labels := dict "poetry" "诗歌" "prose" "散文" "fiction" "小说" "non-fiction" "纪实" }}
+{{ $sectionI18nKeys := dict "poetry" "nav_poetry" "prose" "nav_prose" "fiction" "nav_fiction" "non-fiction" "nav_nonfiction" }}
 
 <section class="home-sections">
   <div class="container">
@@ -20,8 +22,8 @@
     {{ if $section }}
     <div class="section-block">
       <div class="section-header">
-        <h2 class="section-title">{{ index $labels . }}</h2>
-        <a href="{{ $section.RelPermalink }}" class="section-more">阅读更多 →</a>
+        <h2 class="section-title" data-i18n-en="{{ index $i18n (index $sectionI18nKeys .) }}">{{ index $labels . }}</h2>
+        <a href="{{ $section.RelPermalink }}" class="section-more" data-i18n-en="{{ index $i18n "read_more" }}">阅读更多 →</a>
       </div>
       <ul class="article-list">
         {{ range first 3 $section.RegularPages.ByDate.Reverse }}

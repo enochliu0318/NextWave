@@ -1,3 +1,4 @@
+{{ $i18n := .Site.Data.i18n }}
 <header class="site-header">
   <div class="container header-inner">
     <div class="header-top">
@@ -5,7 +6,7 @@
         <span class="site-name">后浪</span>
         <span class="site-name-en">NextWave</span>
       </a>
-      <button type="button" class="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="打开导航菜单">
+      <button type="button" class="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="打开导航菜单" data-i18n-en-label="{{ index $i18n "nav_toggle_label" }}">
         <span class="nav-toggle-bar"></span>
         <span class="nav-toggle-bar"></span>
         <span class="nav-toggle-bar"></span>
@@ -13,9 +14,9 @@
     </div>
     <nav class="site-nav" id="site-nav">
       {{ range .Site.Menus.main }}
-      <a href="{{ .URL | relURL }}" class="nav-link{{ if $.IsMenuCurrent "main" . }} active{{ end }}">{{ .Name }}</a>
+      <a href="{{ .URL | relURL }}" class="nav-link{{ if $.IsMenuCurrent "main" . }} active{{ end }}"{{ with .Params.i18n }} data-i18n-en="{{ index $i18n . }}"{{ end }}>{{ .Name }}</a>
       {{ end }}
-
+      <button type="button" id="lang-switch" class="lang-switch" data-target-lang="en" aria-label="切换到英文">EN</button>
     </nav>
   </div>
 </header>

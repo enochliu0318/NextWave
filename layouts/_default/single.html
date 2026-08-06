@@ -1,4 +1,7 @@
 {{ define "main" }}
+{{ $i18n := .Site.Data.i18n }}
+{{ $sectionI18nKeys := dict "poetry" "nav_poetry" "prose" "nav_prose" "fiction" "nav_fiction" "non-fiction" "nav_nonfiction" }}
+{{ $parentI18nKey := index $sectionI18nKeys .Section }}
 <article class="article-page{{ if eq .Section "poetry" }} article-poetry{{ end }}">
   <div class="container">
     <header class="article-header">
@@ -15,7 +18,7 @@
     </div>
     {{ if and .Parent .Parent.IsSection }}
     <footer class="article-footer">
-      <a href="{{ .Parent.RelPermalink }}" class="back-link">← 返回{{ .Parent.Title }}</a>
+      <a href="{{ .Parent.RelPermalink }}" class="back-link"><span data-i18n-en="{{ index $i18n "back_to_prefix" }}">← 返回</span><span{{ if $parentI18nKey }} data-i18n-en="{{ index $i18n $parentI18nKey }}"{{ end }}>{{ .Parent.Title }}</span></a>
     </footer>
     {{ end }}
     {{ if in (slice "poetry" "fiction" "prose" "non-fiction") .Section }}

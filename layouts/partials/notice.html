@@ -5,11 +5,17 @@
     - 仅在首页渲染
     - 通过 localStorage 记录已关闭的 version，同一 version 只弹一次
     - 站长更新 notice.yaml 中的 version 后，所有访客都会重新看到新通知
+  通知标题/正文按站点当前双语范围约定，始终保持中文，不随语言切换；
+  仅关闭按钮文字支持中英切换：若 notice.yaml 中设置了 button_text_en
+  则使用该值，否则回退到 data/i18n.yaml 中的默认英文文案。
 */}}
+{{ $i18n := .Site.Data.i18n }}
 {{ $notice := .Site.Data.notice }}
 {{ if and $notice $notice.enabled }}
 {{ $body := trim $notice.body "\r\n\t " }}
 {{ $paragraphs := split $body "\n\n" }}
+{{ $buttonText := $notice.button_text | default "知道啦" }}
+{{ $buttonTextEn := $notice.button_text_en | default (index $i18n "notice_default_button") }}
 <div class="notice-overlay" id="notice-overlay" data-notice-version="{{ $notice.version }}" aria-hidden="true">
   <div class="notice-card" role="dialog" aria-modal="true" aria-labelledby="notice-title">
     <div class="notice-handle" aria-hidden="true"></div>
@@ -19,7 +25,7 @@
       <p>{{ trim . "\r\n\t " }}</p>
       {{ end }}
     </div>
-    <button type="button" class="notice-confirm" id="notice-confirm">{{ $notice.button_text | default "关闭" }}</button>
+    <button type="button" class="notice-confirm" id="notice-confirm" data-i18n-en="{{ $buttonTextEn }}">{{ $buttonText }}</button>
   </div>
 </div>
 {{ end }}

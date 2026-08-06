@@ -6,7 +6,7 @@ pygmentsUseClasses = true
 
 [params]
   slogan = "信仰的后浪，青春的发声"
-  description = "用文字记录成长，用声音回应信仰。"
+  description = "面向青少年的文学发表平台，诗歌、散文、小说，记录青春的声音。"
 
   enableSearch = true
 
@@ -16,30 +16,43 @@ pygmentsUseClasses = true
   name = "首页"
   url = "/"
   weight = 1
+  [menu.main.params]
+    i18n = "nav_home"
 
 [[menu.main]]
   name = "诗歌"
   url = "/poetry/"
   weight = 2
+  [menu.main.params]
+    i18n = "nav_poetry"
 
 [[menu.main]]
   name = "散文"
   url = "/prose/"
   weight = 3
+  [menu.main.params]
+    i18n = "nav_prose"
 
 [[menu.main]]
   name = "小说"
   url = "/fiction/"
   weight = 4
+  [menu.main.params]
+    i18n = "nav_fiction"
+
 [[menu.main]]
   name = "纪实"
   url = "/non-fiction/"
   weight = 5
+  [menu.main.params]
+    i18n = "nav_nonfiction"
 
 [[menu.main]]
   name = "投稿"
   url = "/submit/"
   weight = 6
+  [menu.main.params]
+    i18n = "nav_submit"
 
 #[[menu.main]]
 #  name = "搜索"
@@ -50,6 +63,8 @@ pygmentsUseClasses = true
   name = "关于"
   url = "/about/"
   weight = 7
+  [menu.main.params]
+    i18n = "nav_about"
 
 [markup]
   [markup.goldmark]
