@@ -6,7 +6,12 @@
     <p class="hero-subtitle">NextWave</p>
     <p class="hero-slogan" data-i18n-en="{{ index $i18n "site_slogan" }}">{{ .Site.Params.slogan }}</p>
     {{ with .Content }}
-    <div class="hero-intro">{{ . }}</div>
+    <div class="hero-intro" data-i18n-html-container>
+      <div data-i18n-lang="zh">{{ . }}</div>
+      {{ with $.Params.description_en }}
+      <div data-i18n-lang="en" hidden>{{ . | markdownify }}</div>
+      {{ end }}
+    </div>
     {{ end }}
   </div>
 </section>

@@ -1,10 +1,17 @@
 {{ define "main" }}
 {{ $i18n := .Site.Data.i18n }}
+{{ $sectionI18nKeys := dict "poetry" "nav_poetry" "prose" "nav_prose" "fiction" "nav_fiction" "non-fiction" "nav_nonfiction" }}
+{{ $titleI18nKey := index $sectionI18nKeys .Section }}
 <section class="page-header">
   <div class="container">
-    <h1 class="page-title">{{ .Title }}</h1>
+    <h1 class="page-title"{{ if $titleI18nKey }} data-i18n-en="{{ index $i18n $titleI18nKey }}"{{ end }}>{{ .Title }}</h1>
     {{ with .Content }}
-    <div class="page-intro">{{ . }}</div>
+    <div class="page-intro" data-i18n-html-container>
+      <div data-i18n-lang="zh">{{ . }}</div>
+      {{ with $.Params.description_en }}
+      <div data-i18n-lang="en" hidden>{{ . | markdownify }}</div>
+      {{ end }}
+    </div>
     {{ end }}
   </div>
 </section>

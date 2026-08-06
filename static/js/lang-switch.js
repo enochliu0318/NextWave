@@ -38,6 +38,17 @@
       }
     });
 
+    // 富文本内容切换（如首页/板块简介，可能包含加粗、链接等格式）。
+    // 中英文各自是预渲染好的正常 HTML 节点，这里只是切换 hidden
+    // 属性显示哪一个，不做任何字符串拼接/转义，最不容易出错
+    document.querySelectorAll("[data-i18n-html-container]").forEach(function (container) {
+      var zhEl = container.querySelector('[data-i18n-lang="zh"]');
+      var enEl = container.querySelector('[data-i18n-lang="en"]');
+      if (!enEl) return; // 该内容没有提供英文版本，始终显示中文
+      if (zhEl) zhEl.hidden = isEn;
+      enEl.hidden = !isEn;
+    });
+
     // aria-label 等属性型文案切换（如汉堡菜单按钮的无障碍标签）
     document.querySelectorAll("[data-i18n-en-label]").forEach(function (el) {
       if (isEn) {
@@ -61,6 +72,11 @@
 
   // 页面加载时按已保存的偏好应用一次
   applyLang(getSavedLang());
+
+  // 应用完成后立即撤销 head.html 中同步脚本加的防闪烁隐藏
+  // （若当前偏好是中文，head 脚本本就没有隐藏过页面，这里是无害的空操作）
+  document.documentElement.style.visibility = "";
+  document.documentElement.removeAttribute("data-lang-init");
 
   if (button) {
     button.addEventListener("click", function () {

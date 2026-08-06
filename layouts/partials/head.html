@@ -1,5 +1,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  /* 防止中英切换闪烁：若上次访问选择了英文，在页面开始绘制前
+     先隐藏整个页面，等 js/lang-switch.js 把文案换成英文后再显示，
+     避免访客先看到中文原文再"跳"成英文的闪烁感。
+     加了 1.5 秒兜底：万一脚本因网络问题未能及时加载，也会强制显示，
+     不会导致页面永久空白。 */
+  (function () {
+    try {
+      if (window.localStorage.getItem("nextwave-lang") === "en") {
+        document.documentElement.style.visibility = "hidden";
+        document.documentElement.setAttribute("data-lang-init", "en");
+        window.setTimeout(function () {
+          document.documentElement.style.visibility = "";
+          document.documentElement.removeAttribute("data-lang-init");
+        }, 1500);
+      }
+    } catch (e) {
+      /* localStorage 不可用时忽略，按中文默认状态正常显示 */
+    }
+  })();
+</script>
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
