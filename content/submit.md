@@ -1,5 +1,26 @@
 ---
 title: "投稿方式"
+title_en: "How to Submit"
+description_en: |
+  ## Call for Submissions
+
+  We warmly welcome submissions from students, teachers, and parents!
+
+  ## 📖 Accepted Genres
+
+  Including but not limited to poetry, prose, fiction, non-fiction, essays, and other literary forms.
+
+  ## ✉️ How to Submit
+
+  Please send your work to: [Enochliu0318@gmail.com](mailto:Enochliu0318@gmail.com) (Contact: Enoch)
+
+  Please include the following in your email:
+
+  1. Name / Pen name
+
+  2. The submitted article (as attachment)
+
+  3. A brief introduction of the article within 20 characters (optional)
 ---
 
 ## 徵稿启事

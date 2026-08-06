@@ -5,7 +5,7 @@
 <article class="article-page{{ if eq .Section "poetry" }} article-poetry{{ end }}">
   <div class="container">
     <header class="article-header">
-      <h1 class="article-page-title">{{ .Title }}</h1>
+      <h1 class="article-page-title"{{ with .Params.title_en }} data-i18n-en="{{ . }}"{{ end }}>{{ .Title }}</h1>
       {{ if or .Params.author (not .Date.IsZero) }}
       <div class="article-meta">
         {{ with .Params.author }}<span class="article-author">{{ . }}</span>{{ end }}
@@ -13,9 +13,20 @@
       </div>
       {{ end }}
     </header>
+
+    {{ if .Params.description_en }}
+    {{/* about / submit 等页面：支持中英切换 */}}
+    <div class="article-content" data-i18n-html-container>
+      <div data-i18n-lang="zh">{{ .Content }}</div>
+      <div data-i18n-lang="en" hidden>{{ .Params.description_en | markdownify }}</div>
+    </div>
+    {{ else }}
+    {{/* 普通文章：始终显示中文正文 */}}
     <div class="article-content">
       {{ .Content }}
     </div>
+    {{ end }}
+
     {{ if and .Parent .Parent.IsSection }}
     <footer class="article-footer">
       <a href="{{ .Parent.RelPermalink }}" class="back-link"><span data-i18n-en="{{ index $i18n "back_to_prefix" }}">← 返回</span><span{{ if $parentI18nKey }} data-i18n-en="{{ index $i18n $parentI18nKey }}"{{ end }}>{{ .Parent.Title }}</span></a>

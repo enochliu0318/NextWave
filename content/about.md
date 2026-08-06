@@ -1,5 +1,24 @@
 ---
 title: "关于后浪"
+title_en: "About NextWave"
+description_en: |
+  **NextWave** is a literary reading and creative expression platform crafted especially for teenagers.
+
+  We believe every generation of young people carries its own unique voice—whatever the theme, it deserves to be sincerely heard and recorded. We also believe that the growth of adolescents is inseparable from the care and guidance of spiritual elders; those warm yet powerful exhortations will accompany us as we walk forward with steady conviction.
+
+  ### NextWave Team:
+
+  Editor-in-Chief / Review: [Enoch](mailto:enochliu0318@gmail.com)
+
+  Visuals / Layout: [Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany](mailto:TiffanyP@126.com)
+
+  Comments / Management: [Enoch](mailto:enochliu0318@gmail.com)
+
+  Operations / Development: [Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany](mailto:TiffanyP@126.com)
+
+  *“One can walk fast alone, but a group can walk far.”*
+
+  Dear students, if you also love words, you are warmly invited to join the NextWave team—let us witness growth together through writing.
 ---
 
 **后浪 NextWave** 是一个专为青少年打造的文学阅读与创作表达平台。
