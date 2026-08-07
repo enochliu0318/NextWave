@@ -8,7 +8,7 @@ description_en: |
 
   ### NextWave Team:
 
-  Editor-in-Chief / Review: [Enoch](mailto:enochliu0318@gmail.com), [Alice]()
+  Editor-in-Chief / Review: [Enoch](mailto:enochliu0318@gmail.com), [Alice](mailto:alicegg1225@163.com)
 
   Visuals / Layout: [Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany](mailto:TiffanyP@126.com)
 
@@ -27,7 +27,7 @@ description_en: |
 
 ### 后浪团队：
 
-主编 / 审核：[Enoch](mailto:enochliu0318@gmail.com), [Alice]()
+主编 / 审核：[Enoch](mailto:enochliu0318@gmail.com), [Alice](mailto:alicegg1225@163.com)
 
 视觉 / 排版：[Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany](mailto:TiffanyP@126.com)
 
