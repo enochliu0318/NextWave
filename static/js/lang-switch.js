@@ -3,6 +3,38 @@
 
   var STORAGE_KEY = "nextwave-lang";
   var button = document.getElementById("lang-switch");
+  var currentLangValue = "zh";
+  var giscusObserver = null;
+
+  // 把当前语言发给 giscus 的 iframe（若尚未加载出来则返回 false）
+  function sendGiscusLang(lang) {
+    var iframe = document.querySelector("iframe.giscus-frame");
+    if (!iframe || !iframe.contentWindow) return false;
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { lang: lang === "en" ? "en" : "zh-CN" } } },
+      "https://giscus.app"
+    );
+    return true;
+  }
+
+  // 评论区用了懒加载（data-loading="lazy"），iframe 要等访客滚动
+  // 到附近才会被创建。这里用 MutationObserver 监听它何时出现，
+  // 再等它自身的 load 事件（确保 giscus 内部的消息监听已就绪）
+  // 触发后再发送语言设置，避免消息发早了被"漏接"
+  function watchGiscusFrame() {
+    var container = document.querySelector(".giscus-section");
+    if (!container || giscusObserver) return;
+    giscusObserver = new MutationObserver(function () {
+      var iframe = document.querySelector("iframe.giscus-frame");
+      if (!iframe) return;
+      giscusObserver.disconnect();
+      giscusObserver = null;
+      iframe.addEventListener("load", function () {
+        sendGiscusLang(currentLangValue);
+      });
+    });
+    giscusObserver.observe(container, { childList: true, subtree: true });
+  }
 
   function getSavedLang() {
     try {
@@ -62,6 +94,13 @@
     });
 
     document.documentElement.setAttribute("lang", isEn ? "en" : "zh-CN");
+
+    // giscus 评论框架的界面语言联动（如"登录"“评论”“由 giscus 强力驱动”
+    // 等按钮/提示文字），评论内容本身不受影响、永远保持原样
+    currentLangValue = lang;
+    if (!sendGiscusLang(lang)) {
+      watchGiscusFrame();
+    }
 
     if (button) {
       button.textContent = isEn ? "中" : "EN";
