@@ -12,8 +12,8 @@ description_en: |
 
   Visuals / Layout: [Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany](mailto:TiffanyP@126.com)
 
-  Comments / Management: [Enoch](mailto:enochliu0318@gmail.com)
-
+  Comments / Management: [Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany](mailto:TiffanyP@126.com)
+  
   Operations / Development: [Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany](mailto:TiffanyP@126.com)
 
   *“One can walk fast alone, but a group can walk far.”*
@@ -31,7 +31,7 @@ description_en: |
 
 视觉 / 排版：[Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany](mailto:TiffanyP@126.com)
 
-评论 / 管理：[Enoch](mailto:enochliu0318@gmail.com)
+评论 / 管理：[Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany](mailto:TiffanyP@126.com)
 
 运维 / 开发：[Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany](mailto:TiffanyP@126.com)
 

@@ -2,7 +2,7 @@
 title: "动物的争吵"
 author: "Aiden Zhang"
 date: 2026-07-30T09:14:53+08:00
-draft: true
+draft: false
 description: "眼见未必全貌，偏见常掩真相；换个视角看世界，多一份体谅与温暖。"
 ---
 
