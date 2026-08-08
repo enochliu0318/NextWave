@@ -7,8 +7,8 @@
   var systemDark = window.matchMedia
     ? window.matchMedia("(prefers-color-scheme: dark)")
     : null;
-  var giscusObserver = null;
-  var currentTheme = null; // 记录当前主题，供 giscus 发送时实时读取
+  var currentTheme = null; // 记录当前主题，供 giscus 同步时实时读取
+  var giscusTimer = null; // 有界轮询：负责把主题同步给懒加载的 giscus iframe
 
   function getSaved() {
     try {
@@ -28,14 +28,20 @@
     }
   }
 
-  // giscus 评论主题是各自独立的 CSS 文件，按当前主题返回对应的 URL
+  // giscus 评论主题是各自独立的 CSS 文件。
+  // 浅色地址直接读 comments 脚本上的 data-theme —— 那是 Hugo 用 absURL 写定的
+  // 绝对地址，无论站点部署在哪个域名/路径都能保证正确；深色地址在其基础上
+  // 替换文件名即可，不依赖 window.location.origin（后者在本地/子路径访问时不可靠）。
   function getThemeUrl(dark) {
+    var el = document.querySelector("script[data-theme]");
+    var base = el ? el.getAttribute("data-theme") : null;
+    if (base && !dark) return base;
+    if (base) return base.replace(/giscus-theme\.css$/, "giscus-theme-dark.css");
     return window.location.origin + (dark ? "/css/giscus-theme-dark.css" : "/css/giscus-theme.css");
   }
 
-  // 把主题同步给 giscus 的 iframe（若尚未创建则返回 false）
-  // 发送时实时读取 currentTheme，确保永远是用户此刻选中的主题
-  function sendGiscusTheme() {
+  // 把当前主题推送给 giscus 的 iframe（若 iframe 尚不存在则返回 false）
+  function pushGiscusTheme() {
     var iframe = document.querySelector("iframe.giscus-frame");
     if (!iframe || !iframe.contentWindow) return false;
     iframe.contentWindow.postMessage(
@@ -45,23 +51,35 @@
     return true;
   }
 
-  // giscus 懒加载，等 iframe 出现并完成 load 后再发送主题设置。
-  // 注意：不在创建观察器时捕获主题值，而是等真正发送（load 之后）时
-  // 再读取 currentTheme——这样即使先切换主题、后加载评论区，发给 giscus
-  // 的也一定是用户此刻选中的最新主题（修复"后加载仍是浅色"的问题）。
-  function watchGiscusFrame() {
-    var container = document.querySelector(".giscus-section");
-    if (!container || giscusObserver) return;
-    giscusObserver = new MutationObserver(function () {
-      var iframe = document.querySelector("iframe.giscus-frame");
-      if (!iframe) return;
-      giscusObserver.disconnect();
-      giscusObserver = null;
-      iframe.addEventListener("load", function () {
-        sendGiscusTheme();
-      });
-    });
-    giscusObserver.observe(container, { childList: true, subtree: true });
+  // 评论区是懒加载的（data-loading="lazy"），iframe 要等访客滚动到附近才会被
+  // giscus 注入；而且 giscus 内部的消息监听也要等它自己初始化完成后才就绪。
+  // 为了彻底消除时序问题（尤其"先切到深色、再让评论区加载"的场景），这里用
+  // 一个"有界轮询"持续推送当前主题：发送时实时读取 currentTheme，保证无论
+  // iframe 何时出现、用户切换过几次，最终同步的永远是用户此刻选中的主题。
+  // giscus 对 setConfig 是幂等的：iframe 出现后连发几次相同的主题不会出错，
+  // 只会确保它确实被接收并应用，因此可安全地重复发送。
+  function startGiscusSync() {
+    if (!document.querySelector(".giscus-section")) return; // 本页没有评论区
+    if (giscusTimer) return; // 已有轮询在跑，避免叠加；正在进行中的轮询读取的就是
+                             // 最新的 currentTheme，无需重启
+    var polls = 0; // 空转次数
+    var hits = 0;  // 成功推送到 iframe 的次数
+    giscusTimer = window.setInterval(function () {
+      polls++;
+      if (pushGiscusTheme()) {
+        hits++;
+        // iframe 已出现并连发数次，认为 giscus 已接收，停止本轮
+        if (hits >= 6) {
+          window.clearInterval(giscusTimer);
+          giscusTimer = null;
+        }
+      } else if (polls > 20) {
+        // iframe 一直未出现（例如评论区确实没被触发），结束本轮；
+        // 下次 applyTheme（用户再次切换）会重新开启
+        window.clearInterval(giscusTimer);
+        giscusTimer = null;
+      }
+    }, 400);
   }
 
   function applyTheme(theme, animate) {
@@ -80,9 +98,9 @@
       button.setAttribute("aria-label", dark ? "切换到浅色模式" : "切换到深色模式");
     }
 
-    if (!sendGiscusTheme()) {
-      watchGiscusFrame();
-    }
+    // 立即推一次（若 iframe 已在），并启动有界轮询兜底（若尚未加载/未就绪）
+    pushGiscusTheme();
+    startGiscusSync();
   }
 
   // 初始化：优先用已保存的偏好，否则跟随系统，最后回退浅色
@@ -108,3 +126,4 @@
     });
   }
 })();
+
