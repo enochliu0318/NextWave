@@ -8,6 +8,7 @@
     ? window.matchMedia("(prefers-color-scheme: dark)")
     : null;
   var giscusObserver = null;
+  var currentTheme = null; // 记录当前主题，供 giscus 发送时实时读取
 
   function getSaved() {
     try {
@@ -33,18 +34,22 @@
   }
 
   // 把主题同步给 giscus 的 iframe（若尚未创建则返回 false）
-  function sendGiscusTheme(dark) {
+  // 发送时实时读取 currentTheme，确保永远是用户此刻选中的主题
+  function sendGiscusTheme() {
     var iframe = document.querySelector("iframe.giscus-frame");
     if (!iframe || !iframe.contentWindow) return false;
     iframe.contentWindow.postMessage(
-      { giscus: { setConfig: { theme: getThemeUrl(dark) } } },
+      { giscus: { setConfig: { theme: getThemeUrl(currentTheme === "dark") } } },
       "https://giscus.app"
     );
     return true;
   }
 
-  // giscus 懒加载，等 iframe 出现并完成 load 后再发送主题设置
-  function watchGiscusFrame(dark) {
+  // giscus 懒加载，等 iframe 出现并完成 load 后再发送主题设置。
+  // 注意：不在创建观察器时捕获主题值，而是等真正发送（load 之后）时
+  // 再读取 currentTheme——这样即使先切换主题、后加载评论区，发给 giscus
+  // 的也一定是用户此刻选中的最新主题（修复"后加载仍是浅色"的问题）。
+  function watchGiscusFrame() {
     var container = document.querySelector(".giscus-section");
     if (!container || giscusObserver) return;
     giscusObserver = new MutationObserver(function () {
@@ -53,7 +58,7 @@
       giscusObserver.disconnect();
       giscusObserver = null;
       iframe.addEventListener("load", function () {
-        sendGiscusTheme(dark);
+        sendGiscusTheme();
       });
     });
     giscusObserver.observe(container, { childList: true, subtree: true });
@@ -61,6 +66,7 @@
 
   function applyTheme(theme, animate) {
     var dark = theme === "dark";
+    currentTheme = theme;
 
     if (animate) {
       document.documentElement.classList.add("theme-transition");
@@ -74,8 +80,8 @@
       button.setAttribute("aria-label", dark ? "切换到浅色模式" : "切换到深色模式");
     }
 
-    if (!sendGiscusTheme(dark)) {
-      watchGiscusFrame(dark);
+    if (!sendGiscusTheme()) {
+      watchGiscusFrame();
     }
   }
 
