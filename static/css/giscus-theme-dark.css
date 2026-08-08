@@ -1,0 +1,124 @@
+/*!
+ * NextWave（后浪）站点专属 giscus 深色主题
+ * 与浅色版（giscus-theme.css）保持一致的结构，仅将颜色替换为
+ * 深色变量（对应 static/css/style.css 中 [data-theme="dark"] 一套）。
+ * 由 js/theme.js 在切换到深色时通过 postMessage 告诉 giscus 载入本文件。
+ */
+main {
+  /* 代码高亮颜色沿用 GitHub 官方深色主题默认值 */
+  --color-prettylights-syntax-comment: #8b949e;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-variable: #ffa657;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-string-regexp: #7ee787;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-italic: #c9d1d9;
+  --color-prettylights-syntax-markup-bold: #c9d1d9;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+  --color-prettylights-syntax-markup-inserted-bg: #033a16;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-ignored-text: #c9d1d9;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+
+  /* 次级按钮（取消、回复、表情反应等） */
+  --color-btn-text: #e6eaf2;
+  --color-btn-bg: #1a1e29;
+  --color-btn-border: #2a3040;
+  --color-btn-shadow: 0 1px 0 rgb(77 181 217 / 5%);
+  --color-btn-inset-shadow: inset 0 1px 0 rgb(255 255 255 / 4%);
+  --color-btn-hover-bg: #1e2c36;
+  --color-btn-hover-border: #4db5d9;
+  --color-btn-active-bg: #1e2c36;
+  --color-btn-active-border: #4db5d9;
+  --color-btn-selected-bg: #1e2c36;
+
+  /* 主按钮（发表评论） */
+  --color-btn-primary-text: #ffffff;
+  --color-btn-primary-bg: #2a8fb0;
+  --color-btn-primary-border: #2a8fb0;
+  --color-btn-primary-shadow: 0 1px 0 rgb(21 101 126 / 20%);
+  --color-btn-primary-inset-shadow: inset 0 1px 0 rgb(255 255 255 / 10%);
+  --color-btn-primary-hover-bg: #3f9fc0;
+  --color-btn-primary-hover-border: #3f9fc0;
+  --color-btn-primary-selected-bg: #3f9fc0;
+  --color-btn-primary-selected-shadow: inset 0 1px 0 rgb(0 0 0 / 20%);
+  --color-btn-primary-disabled-text: rgb(255 255 255 / 70%);
+  --color-btn-primary-disabled-bg: rgb(42 143 176 / 50%);
+  --color-btn-primary-disabled-border: rgb(42 143 176 / 30%);
+
+  --color-action-list-item-default-hover-bg: #1e2c36;
+  --color-segmented-control-bg: #12151d;
+  --color-segmented-control-button-bg: #1a1e29;
+  --color-segmented-control-button-selected-border: #2a3040;
+
+  /* 前景 / 背景 / 边框 */
+  --color-fg-default: #e6eaf2;
+  --color-fg-muted: #98a1b3;
+  --color-fg-subtle: #7d8798;
+  --color-canvas-default: #1a1e29;
+  --color-canvas-overlay: #1a1e29;
+  --color-canvas-inset: #12151d;
+  --color-canvas-subtle: #12151d;
+  --color-border-default: #2a3040;
+  --color-border-muted: #232937;
+  --color-neutral-muted: rgb(42 48 64 / 40%);
+
+  /* 强调色（链接、边框高亮、已选中状态等），映射到站点深色主题主色 */
+  --color-accent-fg: #4db5d9;
+  --color-accent-emphasis: #4db5d9;
+  --color-accent-muted: rgb(77 181 217 / 40%);
+  --color-accent-subtle: #1e2c36;
+
+  /* 状态色沿用 GitHub 语义色，保证识别度 */
+  --color-success-fg: #3fb950;
+  --color-attention-fg: #d29922;
+  --color-attention-muted: rgb(210 153 34 / 40%);
+  --color-attention-subtle: #2a2118;
+  --color-danger-fg: #f85149;
+  --color-danger-muted: rgb(248 81 73 / 40%);
+  --color-danger-subtle: #4d1817;
+
+  --color-primer-shadow-inset: inset 0 1px 0 rgb(77 181 217 / 8%);
+  --color-scale-gray-1: #1e2c36;
+  --color-scale-blue-1: #23394a;
+
+  /*! Extensions from @primer/css/alerts/flash.scss */
+  --color-social-reaction-bg-hover: var(--color-scale-gray-1);
+  --color-social-reaction-bg-reacted-hover: var(--color-scale-blue-1);
+}
+
+main .gsc-loading-image {
+  background-image: url("https://github.githubassets.com/images/mona-loading-dark.gif");
+}
+
+/*! 自定义补充样式：字体与圆角与站点 UI（--font-sans / --radius-md）保持一致 */
+main {
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+}
+
+main .gsc-comment-box,
+main .gsc-comment-box textarea,
+main .gsc-comment {
+  border-radius: 0.75rem;
+}
+
+main button {
+  border-radius: 0.375rem;
+}

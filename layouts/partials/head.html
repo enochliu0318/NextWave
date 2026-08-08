@@ -1,6 +1,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
+  /* 深浅色主题防闪烁：在页面开始绘制前，先从 localStorage 读取上次
+     选择（或回退到系统偏好）并设置到 <html data-theme>，让 CSS 从一开始
+     就按正确主题渲染，避免先看到浅色再"跳"成深色的闪烁感。 */
+  (function () {
+    try {
+      var saved = window.localStorage.getItem("nextwave-theme");
+      var theme = saved === "dark" || saved === "light"
+        ? saved
+        : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+      /* localStorage 不可用时按浅色默认状态显示 */
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  })();
+</script>
+<script>
   /* 防止中英切换闪烁：若上次访问选择了英文，在页面开始绘制前
      先隐藏整个页面，等 js/lang-switch.js 把文案换成英文后再显示，
      避免访客先看到中文原文再"跳"成英文的闪烁感。
