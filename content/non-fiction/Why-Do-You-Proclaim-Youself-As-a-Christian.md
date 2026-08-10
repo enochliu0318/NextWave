@@ -3,7 +3,7 @@ title: "Why Do You Proclaim Youself as a Christian"
 author: "Enoch Liu"
 date: 2026-08-10T11:34:45+08:00
 draft: false
-description: "文章摘要（可选，用于列表页展示）"
+description:
 ---
 
 There are several reasons that support my claim to be a Christian.
