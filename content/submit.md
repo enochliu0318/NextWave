@@ -12,7 +12,7 @@ description_en: |
 
   ## ✉️ How to Submit
 
-  Please send your work to: [Enochliu0318@gmail.com](mailto:Enochliu0318@gmail.com) (Contact: Enoch)
+  Please send your work to: [nextwave2026@tutamail.com](mailto:nextwave2026@tutamail.com)
 
   Please include the following in your email:
 
@@ -33,7 +33,7 @@ description_en: |
 
 ## ✉️ 投稿方式
 
-请将稿件发送至邮箱：<Enochliu0318@gmail.com>（联系人：Enoch）
+请将稿件发送至邮箱：[nextwave2026@tutamail.com](mailto:nextwave2026@tutamail.com)
 
 邮件请附带以下内容：
 
