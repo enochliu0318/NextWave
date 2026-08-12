@@ -8,7 +8,7 @@ description_en: |
 
   ### NextWave Team:
 
-  Editor-in-Chief / Review: [Enoch](mailto:enochliu0318@gmail.com), [Alice](mailto:alicegg1225@163.com)
+  Editor-in-Chief / Review: [Enoch](mailto:enochliu0318@gmail.com), [Sissi](sissi080129@gmail.com), [Alice](mailto:alicegg1225@163.com)
 
   Visuals / Layout: [Enoch](mailto:enochliu0318@gmail.com), [Dorcas](mailto:18453151010@163.com), [Tiffany](mailto:TiffanyP@126.com)
 
