@@ -25,6 +25,8 @@
     </div>
     <nav class="site-nav" id="site-nav">
       {{ range .Site.Menus.main }}
+      {{/* 次级分组（投稿/关于等）与主栏目之间画一条分隔线，只在分组第一项前显示 */}}
+      {{ if .Params.secondary }}<span class="nav-divider" aria-hidden="true"></span>{{ end }}
       <a href="{{ .URL | relURL }}" class="nav-link{{ if $.IsMenuCurrent "main" . }} active{{ end }}"{{ with .Params.i18n }} data-i18n-en="{{ index $i18n . }}"{{ end }}>{{ .Name }}</a>
       {{ end }}
       {{ if .Site.Params.enableSearch }}

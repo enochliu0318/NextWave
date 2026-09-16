@@ -18,13 +18,6 @@ pygmentsUseClasses = true
   author = "MUGEE"
 
 [[menu.main]]
-  name = "首页"
-  url = "/"
-  weight = 1
-  [menu.main.params]
-    i18n = "nav_home"
-
-[[menu.main]]
   name = "诗歌"
   url = "/poetry/"
   weight = 2
@@ -58,6 +51,8 @@ pygmentsUseClasses = true
   weight = 6
   [menu.main.params]
     i18n = "nav_submit"
+    # 次级分组的第一项：它前面会显示一条分隔线
+    secondary = true
 
 [[menu.main]]
   name = "关于"

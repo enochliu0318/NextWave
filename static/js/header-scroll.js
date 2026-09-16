@@ -20,6 +20,7 @@
 
   function setNavOpen(open) {
     header.classList.toggle("is-nav-open", open);
+    header.classList.toggle("is-menu-open", open);
     toggleBtn.setAttribute("aria-expanded", open ? "true" : "false");
   }
 

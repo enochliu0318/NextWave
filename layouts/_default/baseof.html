@@ -8,6 +8,25 @@
   {{- partial "notice.html" . -}}
   {{- end -}}
   {{- partial "header.html" . -}}
+  {{- $i18n := .Site.Data.i18n -}}
+  {{- /* 悬浮「返回」按钮：文章页回所属栏目列表页，栏目列表页回首页；fixed 定位不随滚动 */ -}}
+  {{- $backTarget := "" -}}
+  {{- if and .Parent .Parent.IsSection -}}
+    {{- $backTarget = .Parent.RelPermalink -}}
+  {{- else if eq .Kind "section" -}}
+    {{- $backTarget = "/" | relURL -}}
+  {{- end -}}
+  {{- with $backTarget -}}
+  <nav class="back-float-nav" aria-label="返回上级" data-i18n-en-label="Back">
+    <a href="{{ . }}" class="back-button">
+      <svg class="back-button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5"></path>
+        <path d="M12 19l-7-7 7-7"></path>
+      </svg>
+      <span data-i18n-en="Back">返回</span>
+    </a>
+  </nav>
+  {{- end -}}
   <main class="main">
     {{- block "main" . }}{{- end }}
   </main>
