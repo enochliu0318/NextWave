@@ -14,6 +14,11 @@
   // 也不应被判定为"回到顶部"而自动展开导航——默认必须是收起状态。
   var hasScrolled = false;
 
+  // 菜单动画改变头部高度时，浏览器会同步调整 scrollY 保持正文的视觉位置。
+  // 比较两次滚动之间的高度/位移差，避免把滚动锚定当成用户下滑。
+  var lastScrollY = window.scrollY;
+  var lastHeaderHeight = header.getBoundingClientRect().height;
+
   function isMobile() {
     return mobileQuery.matches;
   }
@@ -59,6 +64,16 @@
   }
 
   function onScroll() {
+    var y = window.scrollY;
+    var height = header.getBoundingClientRect().height;
+    var scrollDelta = y - lastScrollY;
+    var heightDelta = height - lastHeaderHeight;
+    lastScrollY = y;
+    lastHeaderHeight = height;
+
+    // scrollY 按整数取整，高度有小数；允许 1px 的舍入误差。
+    if (Math.abs(heightDelta) > 0.01 && Math.abs(scrollDelta - heightDelta) <= 1) return;
+    if (scrollDelta === 0) return;
     hasScrolled = true;
     requestTick();
   }
@@ -73,8 +88,9 @@
   }
 
   function onToggleClick() {
-    var willOpen = !header.classList.contains("is-nav-open");
-    setNavOpen(willOpen);
+    lastScrollY = window.scrollY;
+    lastHeaderHeight = header.getBoundingClientRect().height;
+    setNavOpen(!header.classList.contains("is-nav-open"));
   }
 
   // 点击导航链接后自动收起菜单，避免遮挡下方内容
