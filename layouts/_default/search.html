@@ -1,31 +1,50 @@
 {{ define "main" }}
-<section class="container page">
-  <article>
-    <header>
-      <h1 class="page-title">{{ .Title }}</h1>
-    </header>
-    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-    <script src="/pagefind/pagefind-ui.js"></script>
-    <div id="search"></div>
-    <script>
-      window.addEventListener('DOMContentLoaded', (event) => {
-        new PagefindUI({
-          element: "#search",
-          showSubResults: true,
-          translations: {
-            placeholder: "输入关键词搜索文章...",
-            clear_search: "清除",
-            load_more: "加载更多结果",
-            search_label: "搜索本站",
-            filters_label: "筛选",
-            zero_results: "没有找到关于 \"[SEARCH_TERM]\" 的内容",
-            many_results: "找到 [COUNT] 条关于 \"[SEARCH_TERM]\" 的结果",
-            one_result: "找到 1 条关于 \"[SEARCH_TERM]\" 的结果",
-            alt_search: "没有找到结果，正在尝试搜索 \"[SEARCH_TERM]\" 的近似词"
-          }
-        });
-      });
-    </script>
-  </article>
+{{ $i18n := .Site.Data.i18n }}
+<section class="page-header">
+  <div class="container">
+    <h1 class="page-title" data-i18n-en="{{ index $i18n "nav_search" }}">{{ .Title }}</h1>
+    {{ with .Content }}
+    <div class="page-intro" data-i18n-html-container>
+      <div data-i18n-lang="zh">{{ . }}</div>
+      {{ with $.Params.description_en }}
+      <div data-i18n-lang="en" hidden>{{ . | markdownify }}</div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<section class="search-page">
+  <div class="container">
+    <div class="search-page-box">
+      <svg class="search-page-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="search-input" class="search-page-input"
+             placeholder="输入关键词搜索文章…"
+             autocomplete="off" spellcheck="false" autofocus
+             aria-label="搜索本站">
+      <button type="button" class="search-clear-btn" data-search-clear hidden
+              aria-label="清空输入" data-i18n-en-label="{{ index $i18n "search_clear" }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="currentColor" stroke="none" opacity="0.18"></circle>
+          <line x1="9.5" y1="9.5" x2="14.5" y2="14.5"></line>
+          <line x1="14.5" y1="9.5" x2="9.5" y2="14.5"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="search-filters" role="group" aria-label="按栏目筛选">
+      <button type="button" class="search-chip active" data-section="">全部</button>
+      <button type="button" class="search-chip" data-section="诗歌" data-i18n-en="{{ index $i18n "nav_poetry" }}">诗歌</button>
+      <button type="button" class="search-chip" data-section="散文" data-i18n-en="{{ index $i18n "nav_prose" }}">散文</button>
+      <button type="button" class="search-chip" data-section="小说" data-i18n-en="{{ index $i18n "nav_fiction" }}">小说</button>
+      <button type="button" class="search-chip" data-section="纪实" data-i18n-en="{{ index $i18n "nav_nonfiction" }}">纪实</button>
+    </div>
+
+    <p class="search-page-status" id="search-status" aria-live="polite"></p>
+    <ul class="search-results search-page-results" id="search-results"></ul>
+  </div>
 </section>
 {{ end }}

@@ -712,6 +712,39 @@ html.notice-open {
   margin: 0;
 }
 
+/* 页脚里的站内搜索入口（静态链接，不依赖 JS） */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 0.85rem;
+}
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.footer-link svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  flex-shrink: 0;
+}
+
+.footer-link:hover {
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+}
+
 .footer-author {
   color: var(--color-accent);
   text-decoration: none;
@@ -908,3 +941,481 @@ html.theme-transition *::after {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease,
               box-shadow 0.3s ease, fill 0.3s ease !important;
 }
+
+/* ===== 站内搜索：头部搜索框 =====
+   搜索不做成普通导航栏目，而是在导航右侧放一个“搜索框”样式的按钮，
+   点击（或按 / 、⌘K）从顶部弹出搜索面板。 */
+.search-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
+  padding: 0.3125rem 0.5rem 0.3125rem 0.625rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.search-trigger:hover {
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+}
+
+.search-trigger-icon {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  flex-shrink: 0;
+}
+
+.search-trigger-kbd {
+  min-width: 1.25rem;
+  padding: 0 0.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+}
+
+/* 移动端在汉堡按钮旁提供一个「一次点击即可搜索」的图标按钮。
+   桌面端 .header-actions 用 display:contents 透明化，两个按钮都不占位 */
+.header-actions {
+  display: contents;
+}
+
+.search-trigger-compact {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.search-trigger-compact:hover {
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+}
+
+.search-trigger-compact svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ===== 站内搜索：弹出面板 ===== */
+.search-overlay[hidden] {
+  display: none;
+}
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 7vh 1.25rem 2rem;
+  background: rgba(11, 16, 26, 0.42);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: fadeIn 0.2s ease both;
+}
+
+/* 面板打开时锁住页面滚动 */
+html.search-overlay-open {
+  overflow: hidden;
+}
+
+.search-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 42rem;
+  max-height: 78vh;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 64px rgba(11, 16, 26, 0.28);
+  animation: slideDown 0.24s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.search-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.search-panel-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.search-panel-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  color: var(--color-text);
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.search-panel-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* 清空输入：贴住输入框右端的小圆形图标按钮，只在该框有内容时出现。
+   刻意做成「无边框圆形图标」，与右侧「关闭」文字胶囊形态完全不同，
+   不会看混（原生 input[type=search] 的 ✕ 已由它统一取代，各浏览器表现一致） */
+.search-clear-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  padding: 0;
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.search-clear-btn[hidden] {
+  display: none;
+}
+
+.search-clear-btn:hover {
+  color: var(--color-text);
+}
+
+.search-clear-btn svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* 关闭搜索：带边框 + 文字标签的胶囊按钮，和清空按钮一眼就能区分 */
+.search-panel-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.15rem;
+  padding: 0.28rem 0.7rem;
+  flex-shrink: 0;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.search-panel-close:hover {
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+}
+
+.search-panel-status {
+  margin: 0;
+  padding: 0.65rem 1rem 0.35rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.search-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 0.5rem 0.5rem;
+}
+
+.search-panel-foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border);
+}
+
+.search-panel-all {
+  color: var(--color-accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.search-panel-all:hover {
+  text-decoration: underline;
+}
+
+/* ===== 站内搜索：结果列表（弹层与独立页共用） ===== */
+.search-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-result-item + .search-result-item {
+  border-top: 1px solid var(--color-border);
+}
+
+.search-result-link {
+  display: block;
+  padding: 0.7rem 0.75rem;
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: background var(--transition);
+}
+
+.search-result-link:hover,
+.search-result-item.is-active .search-result-link {
+  background: var(--color-accent-light);
+}
+
+.search-result-section {
+  display: inline-block;
+  margin-bottom: 0.3rem;
+  padding: 0.1rem 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+  border-radius: 999px;
+}
+
+.search-result-title {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  transition: color var(--transition);
+}
+
+.search-result-link:hover .search-result-title,
+.search-result-item.is-active .search-result-title {
+  color: var(--color-accent);
+}
+
+.search-result-snippet {
+  margin: 0 0 0.3rem;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.search-result-meta {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  opacity: 0.85;
+}
+
+/* ===== 站内搜索：/search/ 独立页 ===== */
+.search-page {
+  padding: 2.5rem 0 4rem;
+}
+
+.search-page-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  box-shadow: 0 4px 16px var(--color-shadow);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.search-page-box:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 6px 22px var(--color-shadow);
+}
+
+.search-page-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.search-page-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  color: var(--color-text);
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.search-page-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 42rem;
+  margin: 1.25rem auto 0;
+}
+
+.search-chip {
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.search-chip:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.search-chip.active {
+  color: #ffffff;
+  background: var(--color-accent-gradient);
+  border-color: transparent;
+}
+
+.search-page-status {
+  max-width: 42rem;
+  margin: 1.25rem auto 0;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.search-page-results {
+  max-width: 42rem;
+  margin: 0.75rem auto 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 16px var(--color-shadow);
+  overflow: hidden;
+}
+
+.search-page-results:empty {
+  display: none;
+}
+
+/* 关键词高亮 */
+mark {
+  padding: 0 0.1em;
+  color: inherit;
+  background: linear-gradient(transparent 60%, rgba(255, 208, 71, 0.72) 60%);
+  border-radius: 2px;
+}
+
+[data-theme="dark"] mark {
+  background: linear-gradient(transparent 60%, rgba(77, 181, 217, 0.45) 60%);
+}
+
+/* 深色模式下弹层遮罩需要更暗一些 */
+[data-theme="dark"] .search-overlay {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* ===== 站内搜索：移动端适配 ===== */
+@media (max-width: 640px) {
+  /* 移动端导航是纵向折叠菜单：搜索框占满一行并排在最前面 */
+  .search-trigger {
+    order: -1;
+    width: 100%;
+    justify-content: flex-start;
+    margin: 0 0 0.25rem;
+  }
+
+  .search-trigger-kbd {
+    display: none;
+  }
+
+  /* 移动端把品牌右侧的按钮整理成一组：搜索图标 + 汉堡按钮 */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .search-trigger-compact {
+    display: inline-flex;
+  }
+
+  .search-overlay {
+    padding: 5vh 1rem 1.5rem;
+  }
+
+  .search-panel {
+    max-height: 84vh;
+  }
+
+  /* 移动端收窄头部留白，把空间让给输入框 */
+  .search-panel-head {
+    gap: 0.5rem;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .search-page {
+    padding: 1.5rem 0 3rem;
+  }
+
+  .search-page-box {
+    border-radius: var(--radius-lg);
+  }
+}
+

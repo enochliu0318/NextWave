@@ -6,15 +6,37 @@
         <span class="site-name">后浪</span>
         <span class="site-name-en">NextWave</span>
       </a>
-      <button type="button" class="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="打开导航菜单" data-i18n-en-label="{{ index $i18n "nav_toggle_label" }}">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-      </button>
+      <div class="header-actions">
+        {{ if .Site.Params.enableSearch }}
+        <button type="button" class="search-trigger-compact" data-search-open
+                aria-label="搜索文章" data-i18n-en-label="{{ index $i18n "search_open" }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        {{ end }}
+        <button type="button" class="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="打开导航菜单" data-i18n-en-label="{{ index $i18n "nav_toggle_label" }}">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
     </div>
     <nav class="site-nav" id="site-nav">
       {{ range .Site.Menus.main }}
       <a href="{{ .URL | relURL }}" class="nav-link{{ if $.IsMenuCurrent "main" . }} active{{ end }}"{{ with .Params.i18n }} data-i18n-en="{{ index $i18n . }}"{{ end }}>{{ .Name }}</a>
+      {{ end }}
+      {{ if .Site.Params.enableSearch }}
+      <button type="button" class="search-trigger" data-search-open
+              aria-label="搜索文章" data-i18n-en-label="{{ index $i18n "search_open" }}">
+        <svg class="search-trigger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span class="search-trigger-text" data-i18n-en="{{ index $i18n "search_open" }}">搜索文章</span>
+        <kbd class="search-trigger-kbd">/</kbd>
+      </button>
       {{ end }}
       <button type="button" id="lang-switch" class="lang-switch" data-target-lang="en" aria-label="切换到英文">EN</button>
       <button type="button" id="theme-toggle" class="theme-toggle" aria-label="切换到深色模式" title="切换深浅色">

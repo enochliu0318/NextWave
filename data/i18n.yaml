@@ -18,6 +18,16 @@ nav_submit: "Submit"
 nav_about: "About"
 nav_toggle_label: "Open navigation menu"
 
+# 搜索（头部搜索框按钮 + 弹出面板 + /search/ 独立页）
+# 注：面板里随输入动态变化的文案（“查看全部结果 →”“没有找到…”等）
+#     在 static/js/search.js 顶部的 I18N 表里维护，改这里不生效
+nav_search: "Search"
+search_open: "Search articles"
+search_close: "Close search"
+search_close_label: "Close"
+search_clear: "Clear input"
+search_open_page: "Go to search page →"
+
 # 首页 / 列表页
 read_more: "Read more →"
 back_to_prefix: "← Back to "
@@ -25,6 +35,7 @@ empty_state: "No articles yet — stay tuned."
 
 # 页脚
 footer_built_by: "Built by"
+footer_search: "Search the site"
 
 # 首页通知弹窗的默认按钮文案
 # （若 data/notice.yaml 中设置了 button_text_en，会优先使用那个值）

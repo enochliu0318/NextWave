@@ -73,8 +73,17 @@
     }
   }
 
+  // 点击头部搜索框（移动端的搜索图标也在其中）时收起导航，
+  // 否则展开的菜单会挡在搜索面板上方
+  function onHeaderClick(event) {
+    if (event.target.closest("[data-search-open]")) {
+      setNavOpen(false);
+    }
+  }
+
   toggleBtn.addEventListener("click", onToggleClick);
   nav.addEventListener("click", onNavLinkClick);
+  header.addEventListener("click", onHeaderClick);
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onResize);
 

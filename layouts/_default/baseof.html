@@ -12,9 +12,15 @@
     {{- block "main" . }}{{- end }}
   </main>
   {{- partial "footer.html" . -}}
+  {{- if .Site.Params.enableSearch -}}
+  {{- partial "search-overlay.html" . -}}
+  {{- end -}}
   <script src="{{ "js/header-scroll.js" | relURL }}" defer></script>
   <script src="{{ "js/lang-switch.js" | relURL }}" defer></script>
   <script src="{{ "js/theme.js" | relURL }}?v=2026080812" defer></script>
+  {{- if .Site.Params.enableSearch -}}
+  <script src="{{ "js/search.js" | relURL }}?v=2026091621" defer></script>
+  {{- end -}}
   {{- if .IsHome -}}
   <script src="{{ "js/notice.js" | relURL }}" defer></script>
   {{- end -}}

@@ -1,0 +1,44 @@
+{{ if .Site.Params.enableSearch }}
+{{ $i18n := .Site.Data.i18n }}
+{{/* 搜索弹层：放在 body 末尾，任意页面按 / 或 ⌘K 打开。
+     面板底部的「前往搜索页」常驻，保证 /search/ 独立搜索页始终有入口 */}}
+<div class="search-overlay" id="search-overlay" data-search-url="{{ "/search/" | relURL }}" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true"
+       aria-label="站内搜索"
+       data-i18n-en-label="{{ index $i18n "nav_search" }}">
+    <div class="search-panel-head">
+      <svg class="search-panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="search-overlay-input" class="search-panel-input"
+             placeholder="搜索文章、作者或正文…"
+             autocomplete="off" spellcheck="false"
+             aria-label="搜索本站">
+      {{/* 清空：贴着输入框的小圆形图标按钮，仅在有内容时出现 */}}
+      <button type="button" class="search-clear-btn" data-search-clear hidden
+              aria-label="清空输入" data-i18n-en-label="{{ index $i18n "search_clear" }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="currentColor" stroke="none" opacity="0.18"></circle>
+          <line x1="9.5" y1="9.5" x2="14.5" y2="14.5"></line>
+          <line x1="14.5" y1="9.5" x2="9.5" y2="14.5"></line>
+        </svg>
+      </button>
+      {{/* 关闭：带边框的文字胶囊，与上面的圆形清空按钮形态完全不同，不会混淆 */}}
+      <button type="button" class="search-panel-close" data-search-close
+              aria-label="关闭搜索" data-i18n-en-label="{{ index $i18n "search_close" }}">
+        <span data-i18n-en="{{ index $i18n "search_close_label" }}">关闭</span>
+      </button>
+    </div>
+    <p class="search-panel-status" id="search-overlay-status" aria-live="polite"></p>
+    <div class="search-panel-body">
+      <ul class="search-results" id="search-overlay-results"></ul>
+    </div>
+    <div class="search-panel-foot">
+      {{/* 常驻入口：无关键词时去搜索页，有关键词时带着关键词去看全部结果 */}}
+      <a class="search-panel-all" id="search-overlay-all" href="{{ "/search/" | relURL }}"
+         data-i18n-en="{{ index $i18n "search_open_page" }}">前往搜索页 →</a>
+    </div>
+  </div>
+</div>
+{{ end }}

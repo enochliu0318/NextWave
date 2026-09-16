@@ -1,7 +1,20 @@
 {{ $i18n := .Site.Data.i18n }}
+{{ $searchURL := "/search/" | relURL }}
 <footer class="site-footer">
   <div class="container">
     <p class="footer-slogan" data-i18n-en="{{ index $i18n "site_slogan" }}">{{ .Site.Params.slogan }}</p>
+    {{/* 静态入口：不依赖 JS，让 /search/ 独立搜索页始终可达（搜索页自身不再重复显示） */}}
+    {{ if and .Site.Params.enableSearch (ne .RelPermalink $searchURL) }}
+    <nav class="footer-links" aria-label="页脚链接">
+      <a href="{{ $searchURL }}" class="footer-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span data-i18n-en="{{ index $i18n "footer_search" }}">站内搜索</span>
+      </a>
+    </nav>
+    {{ end }}
     <p class="footer-copy">&copy; 2024 - {{ now.Year }} {{ .Site.Title }} · <span data-i18n-en="{{ index $i18n "footer_built_by" }}">技术支持</span> <a href="https://blog.mugee.uk" class="footer-author" target="_blank" rel="noopener">mugee</a></p>
   </div>
 </footer>

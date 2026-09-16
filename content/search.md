@@ -1,29 +1,8 @@
 ---
 title: "搜索"
-layout: "single"
+layout: "search"
+description: "搜索后浪 NextWave 的诗歌、散文、小说与纪实文章。"
+description_en: "Search every article by title, author or full text."
 ---
 
-<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-<script src="/pagefind/pagefind-ui.js"></script>
-
-<div id="搜索"></div>
-
-<script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-        new PagefindUI({ 
-            element: "#search", 
-            showSubResults: true,
-            translations: {
-                placeholder: "输入关键词搜索文章...",
-                clear_search: "清除",
-                load_more: "加载更多结果",
-                search_label: "搜索本站",
-                filters_label: "筛选",
-                zero_results: "没有找到关于 \"[SEARCH_TERM]\" 的内容",
-                many_results: "找到 [COUNT] 条关于 \"[SEARCH_TERM]\" 的结果",
-                one_result: "找到 1 条关于 \"[SEARCH_TERM]\" 的结果",
-                alt_search: "没有找到结果，正在尝试搜索 \"[SEARCH_TERM]\" 的近似词"
-            }
-        });
-    });
-</script>
+按标题、作者或正文关键词检索全部文章

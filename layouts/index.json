@@ -1,0 +1,22 @@
+{{- /* 搜索索引：由 hugo.toml 中 [outputs] home = [... "JSON"] 触发，
+       输出为 /index.json，供 /search/ 页面的 js/search.js fetch 使用。
+       收录所有正式文章页（不含草稿、搜索页自身），字段全部用 jsonify
+       转义，保证 JSON 合法。 */ -}}
+{{- $pages := where site.RegularPages "RelPermalink" "!=" "/search/" -}}
+{{- $items := slice -}}
+{{- range $p := $pages -}}
+  {{- $section := "" -}}
+  {{- with $p.Parent -}}
+    {{- if eq .Kind "section" }}{{ $section = .Title }}{{ end -}}
+  {{- end -}}
+  {{- $items = $items | append (dict
+        "title" $p.Title
+        "url" $p.RelPermalink
+        "author" (default "" $p.Params.author)
+        "date" ($p.Date.Format "2006年1月2日")
+        "dateSort" ($p.Date.Format "2006-01-02")
+        "section" $section
+        "description" ($p.Description | default ($p.Summary | plainify | truncate 120))
+        "text" ($p.Plain | truncate 10000)
+      ) -}}
+{{- end -}}{{ $items | jsonify (dict "indent" "") }}
