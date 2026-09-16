@@ -569,26 +569,24 @@ body {
    fixed 固定于视口：不随页面滚动；位于 sticky 头部(z-index:100)之下、页面内容之上，
    因此始终压在页头渐变之上（需求：要遮挡渐变背景）。
    left 与头部 .container 内边距一致：水平方向正好落在站名「后浪」的正下方。 */
-/* 与头部 .container 的内容左缘完全一致：任意屏宽下都落在站名「后浪」的正下方 */
+/* 与头部 .container 的内容左缘完全一致：任意屏宽下都落在站名「后浪」的正下方。
+   top 取「头部实际高度 + 0.7rem」：头部高度会随屏宽换行、移动端紧凑态、
+   移动端菜单展开而变化（实测 68.8px ~ 218.8px），写死 rem 会让按钮顶部钻进
+   半透明头部玻璃层，看上去"被挡住一半"，因此由 JS 量测后经 --header-h 传入。
+   回退值 5.3rem 为移动端头部实测高度 → 96px，无 JS 时也完整可见。
+   过渡跟随头部动画，菜单展开/收起时按钮平滑下移/上移，不再突兀跳动。 */
 .back-float-nav {
   position: fixed;
-  top: 5rem;
+  top: calc(var(--header-h, 5.3rem) + 0.7rem);
   left: max(1.25rem, calc((100% - var(--container-width)) / 2 + 1.25rem));
   z-index: 90;
+  transition: top var(--transition);
 }
 
-/* 头部滚动进入紧凑态后按钮同步上移贴近头部（.back-float-nav 是 .site-header 的相邻兄弟） */
-.site-header.is-compact + .back-float-nav {
-  top: 4rem;
-}
-
-/* 移动端：汉堡菜单打开时滑入的导航面板（z-index:100）会盖住回退按钮，
-   故只在菜单打开期间把按钮推到菜单下方，关闭菜单则回到 logo 正下方。
-   菜单最大高度 300px(≈18.75rem) + 头部 ≈4.5rem → 至少 24rem，这里取 28rem 防溢出 */
-@media (max-width: 640px) {
-  .site-header.is-menu-open + .back-float-nav {
-    top: 28rem;
-  }
+/* 首次量测（JS 打上 header-h-ready）之前不做过场动画，
+   否则桌面端加载时按钮会从回退位置 96px 滑到实际位置 80.2px，出现无谓的滑动 */
+html:not(.header-h-ready) .back-float-nav {
+  transition: none;
 }
 
 .back-button {
