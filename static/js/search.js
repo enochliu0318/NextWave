@@ -175,7 +175,7 @@
     return out;
   }
 
-  // 一条搜索结果：栏目标签 + 标题 + 正文摘要 + 作者/日期
+  // 一条搜索结果：栏目标签 + 标题 + 正文摘要 + 作者/年级/日期
   function createResultItem(doc, keywords) {
     var li = document.createElement("li");
     li.className = "search-result-item";
@@ -206,6 +206,7 @@
 
     var metaParts = [];
     if (doc.author) metaParts.push(doc.author);
+    if (doc.grade) metaParts.push(doc.grade);
     if (doc.date) metaParts.push(doc.date);
     if (metaParts.length) {
       var meta = document.createElement("p");

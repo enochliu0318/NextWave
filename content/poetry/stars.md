@@ -1,6 +1,7 @@
 ---
 title: "上帝掌心的星星"
 author: "Luca Wang"
+grade: "G3"
 date: 2026-07-30T09:18:48+08:00
 draft: false
 description: "以纯真视角描绘星光与童心，尽显温馨诗意。"

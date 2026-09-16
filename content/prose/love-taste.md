@@ -1,6 +1,7 @@
 ---
 title: "爱的味道"
 author: "Esther Shi"
+grade: ""
 date: 2026-07-30T09:26:28+08:00
 draft: false
 description: "衣物香气串联童年记忆，感悟爱的温暖"

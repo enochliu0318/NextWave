@@ -1,6 +1,7 @@
 ---
 title: "我的圣诞心愿"
 author: "Annie Si"
+grade: ""
 date: 2026-07-30T09:23:45+08:00
 draft: false
 description: "高原村庄的关怀之旅，传承爱与奉献"

@@ -1,6 +1,7 @@
 ---
 title: "诗之使，发乎情"
 author: "Enoch Liu"
+grade: "G9"
 date: 2026-07-30T08:29:30+08:00
 draft: false
 description: "《诗经》赏析"

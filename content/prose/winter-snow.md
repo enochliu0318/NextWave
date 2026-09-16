@@ -1,6 +1,7 @@
 ---
 title: "冬雪"
 author: "Hulk"
+grade: ""
 date: 2026-07-30T08:13:34+08:00
 draft: false
 description: "雪后嬉戏的快乐，展现冬日景致与美好。"

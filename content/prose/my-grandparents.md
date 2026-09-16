@@ -1,6 +1,7 @@
 ---
 title: "我的爷爷奶奶"
 author: "Alice Li"
+grade: ""
 date: 2026-07-30T09:09:26+08:00
 draft: false
 description: "仿写《祖父的园子》"

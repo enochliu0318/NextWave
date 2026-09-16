@@ -1,6 +1,7 @@
 ---
 title: "秋天"
 author: "Esther Shi"
+grade: ""
 date: 2026-07-30T09:21:30+08:00
 draft: false
 description: "多维绘写秋山秋水与落叶，尽显自然美趣。"

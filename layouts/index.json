@@ -13,6 +13,7 @@
         "title" $p.Title
         "url" $p.RelPermalink
         "author" (default "" $p.Params.author)
+        "grade" (default "" $p.Params.grade)
         "date" ($p.Date.Format "2006年1月2日")
         "dateSort" ($p.Date.Format "2006-01-02")
         "section" $section

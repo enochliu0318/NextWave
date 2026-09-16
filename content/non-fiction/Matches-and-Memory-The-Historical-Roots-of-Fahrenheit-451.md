@@ -1,6 +1,7 @@
 ---
 title: "Matches and Memory the Historical Roots of Fahrenheit 451"
 author: "Enoch Liu"
+grade: "G10"
 date: 2026-08-10T11:38:41+08:00
 draft: false
 ---

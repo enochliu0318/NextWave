@@ -1,6 +1,7 @@
 ---
 title: "树林里的秋天"
 author: "Rebekah Li"
+grade: ""
 date: 2026-07-30T17:03:45+08:00
 draft: false
 description: "多彩秋叶与红枫，展现深秋美景。"

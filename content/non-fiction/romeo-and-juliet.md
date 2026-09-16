@@ -1,7 +1,8 @@
 ---
 title: "浪漫爱情还是愚蠢冲动"
 author: "Enoch Liu"
-date: 2026-07-30T09:29:59+08:00
+grade: "G10"
+date: 2026-05-30T09:29:59+08:00
 draft: false
 description: "《罗密欧与朱丽叶》个人感悟"
 ---

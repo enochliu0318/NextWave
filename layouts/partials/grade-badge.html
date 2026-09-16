@@ -1,0 +1,4 @@
+{{- /* 作者写作年级：纯文字显示（样式跟随所在位置的 article-meta）。
+      调用方式：{{ with .Params.grade }}{{ partial "grade-badge.html" . }}{{ end }}
+      年级留空时不会渲染任何内容 */ -}}
+<span class="article-grade">{{ . }}</span>

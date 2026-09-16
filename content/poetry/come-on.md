@@ -1,6 +1,7 @@
 ---
 title: "加油"
 author: "Esther Shi"
+grade: "G4"
 date: 2026-07-30T08:01:57+08:00
 draft: false
 description: "记录成长脚步，鼓励各年龄段勇于探索真理。"
