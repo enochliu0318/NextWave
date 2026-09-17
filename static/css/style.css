@@ -763,7 +763,7 @@ html.notice-open {
 /* 三栏：品牌（含简介与作品总数） / 栏目 / 探索；两列之间以竖向细分隔线撑起结构 */
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr;
+  grid-template-columns: 1.7fr 1fr 1fr;
   gap: 2.5rem;
   align-items: start;
 }
@@ -799,7 +799,7 @@ html.notice-open {
 
 .footer-name {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.875rem;
   font-weight: 600;
   color: var(--color-text);
   transition: color var(--transition);
@@ -807,7 +807,7 @@ html.notice-open {
 
 .footer-name-en {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   letter-spacing: 0.14em;
   color: var(--color-text-muted);
   transition: color var(--transition);
@@ -819,7 +819,7 @@ html.notice-open {
 }
 
 .footer-slogan {
-  font-size: 0.875rem;
+  font-size: 0.925rem;
   color: var(--color-text-secondary);
   margin: 0;
 }
@@ -836,7 +836,7 @@ html.notice-open {
 
 .footer-stats strong {
   font-family: var(--font-sans);
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 500;
   line-height: 1;
   color: var(--color-accent);
