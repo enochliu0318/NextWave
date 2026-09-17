@@ -1,6 +1,9 @@
 {{ define "main" }}
 {{ $i18n := .Site.Data.i18n }}
-<section class="hero">
+{{ $sections := slice "poetry" "prose" "fiction" "non-fiction" }}
+{{ $labels := dict "poetry" "诗歌" "prose" "散文" "fiction" "小说" "non-fiction" "纪实" }}
+{{ $sectionI18nKeys := dict "poetry" "nav_poetry" "prose" "nav_prose" "fiction" "nav_fiction" "non-fiction" "nav_nonfiction" }}
+<section class="hero home-hero">
   <div class="container">
     <h1 class="hero-title">后浪</h1>
     <p class="hero-subtitle">NextWave</p>
@@ -13,42 +16,56 @@
       {{ end }}
     </div>
     {{ end }}
+    <details class="reading-picker" id="reading-picker">
+      <summary class="reading-start">
+        <span data-i18n-en="Start reading">开始阅读</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </summary>
+      <nav class="reading-options" aria-label="选择阅读栏目" data-i18n-en-label="Choose a section">
+        {{ range $sections }}
+        {{ $name := . }}
+        {{ with $.Site.GetPage (printf "/%s" $name) }}
+        <a href="{{ .RelPermalink }}" class="reading-option">
+          <span data-i18n-en="{{ index $i18n (index $sectionI18nKeys $name) }}">{{ index $labels $name }}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        {{ end }}
+        {{ end }}
+      </nav>
+    </details>
   </div>
 </section>
 
-{{ $sections := slice "poetry" "prose" "fiction" "non-fiction" }}
-{{ $labels := dict "poetry" "诗歌" "prose" "散文" "fiction" "小说" "non-fiction" "纪实" }}
-{{ $sectionI18nKeys := dict "poetry" "nav_poetry" "prose" "nav_prose" "fiction" "nav_fiction" "non-fiction" "nav_nonfiction" }}
-
-<section class="home-sections">
+<section class="home-recent" aria-labelledby="recent-title">
   <div class="container">
-    {{ range $sections }}
-    {{ $section := $.Site.GetPage (printf "/%s" .) }}
-    {{ if $section }}
-    <div class="section-block">
-      <div class="section-header">
-        <h2 class="section-title" data-i18n-en="{{ index $i18n (index $sectionI18nKeys .) }}">{{ index $labels . }}</h2>
-        <a href="{{ $section.RelPermalink }}" class="section-more" data-i18n-en="{{ index $i18n "read_more" }}">阅读更多 →</a>
+    <div class="recent-heading">
+      <div>
+        <p class="recent-eyebrow" aria-hidden="true">THE LATEST</p>
+        <h2 id="recent-title" data-i18n-en="Latest updates">最近更新</h2>
       </div>
-      <ul class="article-list">
-        {{ range first 3 $section.RegularPages.ByDate.Reverse }}
-        <li class="article-item">
-          <a href="{{ .RelPermalink }}" class="article-link">
-            <h3 class="article-title">{{ .Title }}</h3>
-            <div class="article-meta">
-              <span class="article-author">{{ .Params.author }}</span>
-              <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006年1月2日" }}</time>
-            </div>
-            {{ with .Description }}
-            <p class="article-desc">{{ . }}</p>
-            {{ end }}
-          </a>
-        </li>
-        {{ end }}
-      </ul>
+      <span class="recent-note" data-i18n-en="Find your next read.">让文字，与你相遇。</span>
     </div>
-    {{ end }}
-    {{ end }}
+    {{ $articles := where .Site.RegularPages "Section" "in" $sections }}
+    <ul class="recent-list">
+      {{ range first 8 $articles.ByDate.Reverse }}
+      <li>
+        <a href="{{ .RelPermalink }}" class="recent-article">
+          <div class="recent-article-top">
+            <span class="recent-section" data-i18n-en="{{ index $i18n (index $sectionI18nKeys .Section) }}">{{ index $labels .Section }}</span>
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>
+          </div>
+          <h3>{{ .Title }}</h3>
+          <p class="recent-excerpt">{{ .Description | default (.Summary | plainify | truncate 100) }}</p>
+          <div class="recent-article-bottom">
+            <span class="recent-byline">{{ with .Params.author }}<span>{{ . }}</span>{{ end }}{{ with .Params.grade }}{{ partial "grade-badge.html" . }}{{ end }}</span>
+            <span class="recent-read" aria-hidden="true">→</span>
+          </div>
+        </a>
+      </li>
+      {{ else }}
+      <li class="empty-state" data-i18n-en="{{ index $i18n "empty_state" }}">暂无文章，敬请期待。</li>
+      {{ end }}
+    </ul>
   </div>
 </section>
 {{ end }}
