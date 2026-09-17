@@ -14,9 +14,6 @@
           <span class="footer-name-en">NextWave</span>
         </a>
         <p class="footer-slogan" data-i18n-en="{{ index $i18n "site_slogan" }}">{{ .Site.Params.slogan }}</p>
-        {{ with .Site.Params.description }}
-        <p class="footer-desc" data-i18n-en="{{ index $i18n "site_description" }}">{{ . }}</p>
-        {{ end }}
         <p class="footer-stats">
           <span data-i18n-en="Home to">已收录</span>
           <strong>{{ len $articles }}</strong>
