@@ -13,7 +13,7 @@
   {{- $backTarget := "" -}}
   {{- if and .Parent .Parent.IsSection -}}
     {{- $backTarget = .Parent.RelPermalink -}}
-  {{- else if or (eq .Kind "section") (in (slice "/about" "/submit") .Path) -}}
+  {{- else if or (eq .Kind "section") (in (slice "about" "submit") .Path) -}}
     {{- $backTarget = "/" | relURL -}}
   {{- end -}}
   {{- with $backTarget -}}
@@ -41,7 +41,7 @@
   <script src="{{ "js/search.js" | relURL }}?v=2026091622" defer></script>
   {{- end -}}
   {{- if .IsHome -}}
-  <script src="{{ "js/home.js" | relURL }}?v=2026091714" defer></script>
+  <script src="{{ "js/home.js" | relURL }}?v=2026091716" defer></script>
   <script src="{{ "js/notice.js" | relURL }}" defer></script>
   {{- end -}}
 </body>
