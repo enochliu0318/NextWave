@@ -1,6 +1,7 @@
 {{ define "main" }}
 {{ $i18n := .Site.Data.i18n }}
 {{ $sections := slice "poetry" "prose" "fiction" "non-fiction" }}
+{{ $articles := where .Site.RegularPages "Section" "in" $sections }}
 {{ $labels := dict "poetry" "诗歌" "prose" "散文" "fiction" "小说" "non-fiction" "纪实" }}
 {{ $sectionI18nKeys := dict "poetry" "nav_poetry" "prose" "nav_prose" "fiction" "nav_fiction" "non-fiction" "nav_nonfiction" }}
 <section class="hero home-hero">
@@ -16,8 +17,9 @@
       {{ end }}
     </div>
     {{ end }}
+    <div class="hero-actions">
     <details class="reading-picker" id="reading-picker">
-      <summary class="reading-start">
+      <summary class="reading-start glass-button">
         <span data-i18n-en="Start reading">开始阅读</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
       </summary>
@@ -33,19 +35,20 @@
         {{ end }}
       </nav>
     </details>
+    <a class="hero-submit glass-button" href="{{ "submit/" | relURL }}"><span data-i18n-en="Submit your work">投稿</span><span aria-hidden="true">↗</span></a>
+    </div>
   </div>
 </section>
 
-<section class="home-recent" aria-labelledby="recent-title">
-  <div class="container">
+<div class="home-recent">
+  <div class="container home-columns">
+    <section class="recent-main" aria-labelledby="recent-title">
     <div class="recent-heading">
       <div>
         <p class="recent-eyebrow" aria-hidden="true">THE LATEST</p>
         <h2 id="recent-title" data-i18n-en="Latest updates">最近更新</h2>
       </div>
-      <span class="recent-note" data-i18n-en="Find your next read.">让文字，与你相遇。</span>
     </div>
-    {{ $articles := where .Site.RegularPages "Section" "in" $sections }}
     <ul class="recent-list">
       {{ range first 8 $articles.ByDate.Reverse }}
       <li>
@@ -66,6 +69,24 @@
       <li class="empty-state" data-i18n-en="{{ index $i18n "empty_state" }}">暂无文章，敬请期待。</li>
       {{ end }}
     </ul>
+    </section>
+    <aside class="article-stats" aria-labelledby="stats-title">
+      <h2 id="stats-title" data-i18n-en="Article statistics">文章统计</h2>
+      <div class="stats-total"><strong>{{ len $articles }}</strong><span data-i18n-en="Articles published">篇文章已收录</span></div>
+      <ul class="stats-sections">
+        {{ range $sections }}
+        {{ $name := . }}
+        {{ with $.Site.GetPage (printf "/%s" $name) }}
+        <li>
+          <a class="stats-section-link" href="{{ .RelPermalink }}">
+            <span data-i18n-en="{{ index $i18n (index $sectionI18nKeys $name) }}">{{ index $labels $name }}</span>
+            <span class="stats-section-count">{{ len (where $articles "Section" $name) }}</span>
+          </a>
+        </li>
+        {{ end }}
+        {{ end }}
+      </ul>
+    </aside>
   </div>
-</section>
+</div>
 {{ end }}

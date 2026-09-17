@@ -9,11 +9,11 @@
   {{- end -}}
   {{- partial "header.html" . -}}
   {{- $i18n := .Site.Data.i18n -}}
-  {{- /* 悬浮「返回」按钮：文章页回所属栏目列表页，栏目列表页回首页；fixed 定位不随滚动 */ -}}
+  {{- /* 悬浮「返回」按钮：文章页回所属栏目；栏目、投稿和关于页回首页。 */ -}}
   {{- $backTarget := "" -}}
   {{- if and .Parent .Parent.IsSection -}}
     {{- $backTarget = .Parent.RelPermalink -}}
-  {{- else if eq .Kind "section" -}}
+  {{- else if or (eq .Kind "section") (in (slice "/about" "/submit") .Path) -}}
     {{- $backTarget = "/" | relURL -}}
   {{- end -}}
   {{- with $backTarget -}}
