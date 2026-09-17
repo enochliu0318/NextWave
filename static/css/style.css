@@ -753,6 +753,11 @@ html.notice-open {
 }
 
 /* ===== Footer ===== */
+/* 页脚容器比主容器窄（45rem），三栏布局下视觉更紧凑 */
+.site-footer .container {
+  max-width: 45rem;
+}
+
 .site-footer {
   background: var(--color-surface);
   border-top: 1px solid var(--color-border);
