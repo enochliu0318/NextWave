@@ -39,6 +39,7 @@ footer_search: "Search the site"
 footer_col_sections: "Sections"
 footer_col_explore: "Explore"
 footer_works: "works"
+footer_rss: "RSS feed"
 
 # 首页通知弹窗的默认按钮文案
 # （若 data/notice.yaml 中设置了 button_text_en，会优先使用那个值）

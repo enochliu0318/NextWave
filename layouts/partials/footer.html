@@ -14,6 +14,9 @@
           <span class="footer-name-en">NextWave</span>
         </a>
         <p class="footer-slogan" data-i18n-en="{{ index $i18n "site_slogan" }}">{{ .Site.Params.slogan }}</p>
+        {{ with .Site.Params.description }}
+        <p class="footer-desc" data-i18n-en="{{ index $i18n "site_description" }}">{{ . }}</p>
+        {{ end }}
         <p class="footer-stats">
           <span data-i18n-en="Home to">已收录</span>
           <strong>{{ len $articles }}</strong>
@@ -26,7 +29,12 @@
           {{ range $sections }}
           {{ $name := . }}
           {{ with $.Site.GetPage (printf "/%s" $name) }}
-          <li><a href="{{ .RelPermalink }}" data-i18n-en="{{ index $i18n (index $sectionI18nKeys $name) }}">{{ index $labels $name }}</a></li>
+          <li>
+            <a href="{{ .RelPermalink }}" data-i18n-en="{{ index $i18n (index $sectionI18nKeys $name) }}">
+              <span>{{ index $labels $name }}</span>
+              <span class="footer-count">{{ len (where $articles "Section" $name) }}</span>
+            </a>
+          </li>
           {{ end }}
           {{ end }}
         </ul>
@@ -39,6 +47,9 @@
           {{/* 静态入口：不依赖 JS，让 /search/ 独立搜索页始终可达（搜索页自身不再重复显示） */}}
           {{ if and .Site.Params.enableSearch (ne .RelPermalink $searchURL) }}
           <li><a href="{{ $searchURL }}" data-i18n-en="{{ index $i18n "footer_search" }}">站内搜索</a></li>
+          {{ end }}
+          {{ with .Site.Home.OutputFormats.Get "rss" }}
+          <li><a href="{{ .Permalink }}" data-i18n-en="{{ index $i18n "footer_rss" }}">RSS 订阅</a></li>
           {{ end }}
         </ul>
       </nav>

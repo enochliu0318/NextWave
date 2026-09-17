@@ -759,12 +759,27 @@ html.notice-open {
   padding: 3rem 0 2rem;
 }
 
-/* 三栏：品牌（含作品总数） / 栏目 / 探索 */
+/* 三栏：品牌（含简介与作品总数） / 栏目 / 探索；两列之间以竖向细分隔线撑起结构 */
 .footer-grid {
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr;
   gap: 2.5rem;
   align-items: start;
+}
+
+.footer-col {
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.footer-col::before {
+  content: '';
+  position: absolute;
+  top: 0.15rem;
+  bottom: 0.15rem;
+  left: 0;
+  width: 1px;
+  background: var(--color-border);
 }
 
 .footer-brand {
@@ -808,6 +823,15 @@ html.notice-open {
   margin: 0;
 }
 
+/* 站点简介：比标语弱一级，补足品牌区内容密度 */
+.footer-desc {
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin: 0;
+  max-width: 30em;
+}
+
 /* 动态作品总数：与首页文章统计同一数据源，构建时自动更新 */
 .footer-stats {
   display: flex;
@@ -846,6 +870,10 @@ html.notice-open {
 }
 
 .footer-col a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   font-size: 0.9rem;
   color: var(--color-text-secondary);
   text-decoration: none;
@@ -853,6 +881,19 @@ html.notice-open {
 }
 
 .footer-col a:hover {
+  color: var(--color-accent);
+}
+
+/* 栏目列的文章计数（探索列无计数，不受影响） */
+.footer-count {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+  transition: color var(--transition);
+}
+
+.footer-col a:hover .footer-count {
   color: var(--color-accent);
 }
 
@@ -900,7 +941,7 @@ html.notice-open {
     padding: 2.25rem 0 1.5rem;
   }
 
-  /* 品牌独占一行，栏目与探索并排，短列不浪费纵向空间 */
+  /* 品牌独占一行，栏目与探索并排；竖分隔线只留在两列之间 */
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: 2rem 1.5rem;
@@ -908,6 +949,28 @@ html.notice-open {
 
   .footer-brand {
     grid-column: 1 / -1;
+  }
+
+  .footer-col {
+    padding-left: 0;
+  }
+
+  .footer-col::before {
+    content: none;
+  }
+
+  .footer-col + .footer-col {
+    padding-left: 1.5rem;
+  }
+
+  .footer-col + .footer-col::before {
+    content: '';
+    position: absolute;
+    top: 0.15rem;
+    bottom: 0.15rem;
+    left: 0;
+    width: 1px;
+    background: var(--color-border);
   }
 
   .footer-bottom {
