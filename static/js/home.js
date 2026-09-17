@@ -34,7 +34,10 @@
     }
   });
   picker.addEventListener("focusout", function (event) {
-    if (!picker.contains(event.relatedTarget)) {
+    // iOS WebKit 点击链接时可能不转移焦点，relatedTarget 为 null。
+    // 此时不能提前隐藏链接，否则随后的原生 click/跳转可能被取消。
+    // 只有焦点明确移到菜单外才收起；未知目标由外部 click 处理。
+    if (event.relatedTarget && !picker.contains(event.relatedTarget)) {
       picker.open = false;
       openedByHover = false;
     }
