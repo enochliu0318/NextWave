@@ -756,108 +756,130 @@ html.notice-open {
 .site-footer {
   background: var(--color-surface);
   border-top: 1px solid var(--color-border);
-  padding: 2.5rem 1.25rem;
+  padding: 3rem 0 2rem;
 }
 
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
-  max-width: 960px;
-  margin: 0 auto;
+/* 三栏：品牌（含作品总数） / 栏目 / 探索 */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
 }
 
 .footer-brand {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.55rem;
 }
 
 .footer-logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.footer-name {
   font-family: var(--font-serif);
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: var(--color-text);
-  text-decoration: none;
   transition: color var(--transition);
 }
 
-.footer-logo:hover {
+.footer-name-en {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: var(--color-text-muted);
+  transition: color var(--transition);
+}
+
+.footer-logo:hover .footer-name,
+.footer-logo:hover .footer-name-en {
   color: var(--color-accent);
 }
 
 .footer-slogan {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: var(--color-text-secondary);
   margin: 0;
 }
 
-/* 栏目导航 —— 纵向列表 */
-.footer-nav ul {
+/* 动态作品总数：与首页文章统计同一数据源，构建时自动更新 */
+.footer-stats {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin: 0.4rem 0 0;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.footer-stats strong {
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.footer-col-title {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--color-accent);
+}
+
+.footer-col ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
-.footer-nav a {
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
+.footer-col a {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
   text-decoration: none;
   transition: color var(--transition);
 }
 
-.footer-nav a:hover {
+.footer-col a:hover {
   color: var(--color-accent);
 }
 
-.footer-meta {
+.footer-col a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* 底栏：版权 + 技术支持，与上方三栏以细线分隔 */
+.footer-bottom {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 0.75rem;
+  margin-top: 2.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
 }
 
-.footer-links {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.footer-copy {
+.footer-copy,
+.footer-credit {
   font-family: var(--font-sans);
   font-size: 0.8125rem;
   color: var(--color-text-muted);
   margin: 0;
-}
-
-.footer-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.25rem 0.75rem;
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  color: var(--color-text-muted);
-  text-decoration: none;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  transition: color var(--transition), background var(--transition), border-color var(--transition);
-}
-
-.footer-link svg {
-  width: 0.85rem;
-  height: 0.85rem;
-  flex-shrink: 0;
-}
-
-.footer-link:hover {
-  color: var(--color-accent);
-  background: var(--color-accent-light);
-  border-color: var(--color-accent);
 }
 
 .footer-author {
@@ -874,26 +896,26 @@ html.notice-open {
 
 /* ===== Mobile: Footer ===== */
 @media (max-width: 640px) {
-  .footer-container {
-    flex-direction: column;
-    gap: 1.5rem;
+  .site-footer {
+    padding: 2.25rem 0 1.5rem;
+  }
+
+  /* 品牌独占一行，栏目与探索并排，短列不浪费纵向空间 */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1.5rem;
   }
 
   .footer-brand {
-    gap: 0.5rem;
+    grid-column: 1 / -1;
   }
 
-  .footer-nav ul {
+  .footer-bottom {
     flex-direction: column;
-    gap: 0.35rem;
-  }
-
-  .footer-meta {
     align-items: flex-start;
-  }
-
-  .footer-links {
-    justify-content: flex-start;
+    gap: 0.4rem;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
   }
 }
 
