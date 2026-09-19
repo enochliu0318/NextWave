@@ -15,6 +15,7 @@
         "author" (default "" $p.Params.author)
         "grade" (default "" $p.Params.grade)
         "date" ($p.Date.Format "2006年1月2日")
+        "dateEn" ($p.Date.Format "January 2, 2006")
         "dateSort" ($p.Date.Format "2006-01-02")
         "section" $section
         "description" ($p.Description | default ($p.Summary | plainify | truncate 120))

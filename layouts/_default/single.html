@@ -8,7 +8,7 @@
       <div class="article-meta">
         {{ with .Params.author }}<span class="article-author">{{ . }}</span>{{ end }}
         {{ with .Params.grade }}{{ partial "grade-badge.html" . }}{{ end }}
-        {{ if not .Date.IsZero }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006年1月2日" }}</time>{{ end }}
+        {{ if not .Date.IsZero }}<time datetime="{{ .Date.Format "2006-01-02" }}" data-i18n-en="{{ .Date.Format "January 2, 2006" }}">{{ .Date.Format "2006年1月2日" }}</time>{{ end }}
       </div>
       {{ end }}
     </header>

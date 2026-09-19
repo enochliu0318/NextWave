@@ -207,7 +207,9 @@
     var metaParts = [];
     if (doc.author) metaParts.push(doc.author);
     if (doc.grade) metaParts.push(doc.grade);
-    if (doc.date) metaParts.push(doc.date);
+    // 日期按当前语言取：中文索引格式 / 英文 dateEn（缺失时退回中文格式）
+    var dateText = currentLang === "en" ? (doc.dateEn || doc.date) : doc.date;
+    if (dateText) metaParts.push(dateText);
     if (metaParts.length) {
       var meta = document.createElement("p");
       meta.className = "search-result-meta";
