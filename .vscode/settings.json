@@ -1,0 +1,10 @@
+{
+  // Hugo 模板文件虽然扩展名是 .json/.xml 等，但内容是 Go template，
+  // 不能让 VS Code 内置的 JSON 校验器按纯 JSON 语法检查（否则会误报
+  // "Property expected" 之类的错误）。这里把它们关联为 html 语言，
+  // 既消除误报，又保留模板语法高亮。
+  "files.associations": {
+    "**/layouts/**/*.json": "html",
+    "**/layouts/**/*.xml": "html"
+  }
+}

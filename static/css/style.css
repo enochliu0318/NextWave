@@ -1660,3 +1660,60 @@ mark {
   }
 }
 
+/* ===== 滚动条 =====
+   统一美化页面与内部滚动区域（搜索结果、横向滚动的表格/代码）：
+   - 滑块用品牌蓝半透明，圆角且与轨道留有空隙（现代"悬浮"观感）
+   - 悬停时加深，拖拽时更深，交互反馈清晰
+   - Firefox / Chrome 121+ 走标准 scrollbar-* 属性，其余走 WebKit 私有属性 */
+:root {
+  --scrollbar-thumb: rgba(30, 136, 168, 0.35);
+  --scrollbar-thumb-hover: rgba(30, 136, 168, 0.55);
+  --scrollbar-thumb-active: rgba(30, 136, 168, 0.75);
+  --scrollbar-track: transparent;
+}
+
+[data-theme="dark"] {
+  --scrollbar-thumb: rgba(77, 181, 217, 0.28);
+  --scrollbar-thumb-hover: rgba(77, 181, 217, 0.45);
+  --scrollbar-thumb-active: rgba(77, 181, 217, 0.65);
+}
+
+/* 标准属性：scrollbar-color 可继承，写在根上即可覆盖全站；
+   Firefox 下此设置会自动替换系统滚动条，宽度由浏览器按 thin 收窄 */
+:root {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* WebKit（Safari / 旧版 Chrome / Edge） */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+  /* 透明边框 + content-box 裁剪，让滑块两侧留出 2px 空隙、悬浮在轨道上 */
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--scrollbar-thumb-active);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
