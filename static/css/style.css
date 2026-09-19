@@ -801,8 +801,13 @@ html.notice-open {
   font-family: var(--font-serif);
   font-size: 1.875rem;
   font-weight: 600;
-  color: var(--color-text);
-  transition: color var(--transition);
+  /* 渐变字：随主题切换（浅色青蓝→深海蓝，深色亮青→淡紫蓝），呼应开始阅读按钮渐变 */
+  background: var(--color-accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  transition: filter var(--transition);
 }
 
 .footer-name-en {
@@ -813,7 +818,10 @@ html.notice-open {
   transition: color var(--transition);
 }
 
-.footer-logo:hover .footer-name,
+.footer-logo:hover .footer-name {
+  filter: brightness(1.18);
+}
+
 .footer-logo:hover .footer-name-en {
   color: var(--color-accent);
 }
