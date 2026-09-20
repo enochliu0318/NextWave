@@ -936,6 +936,11 @@ html.notice-open {
   text-decoration: underline;
 }
 
+/* 底栏链接之间的间隔点（技术支持 · 更新日志） */
+.footer-credit-sep {
+  color: var(--color-text-muted);
+}
+
 /* ===== Mobile: Footer ===== */
 @media (max-width: 640px) {
   .site-footer {

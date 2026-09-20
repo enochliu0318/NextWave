@@ -41,7 +41,6 @@
         <ul>
           <li><a href="{{ "submit/" | relURL }}" data-i18n-en="{{ index $i18n "nav_submit" }}">投稿</a></li>
           <li><a href="{{ "about/" | relURL }}" data-i18n-en="{{ index $i18n "nav_about" }}">关于</a></li>
-          <li><a href="{{ "changelog/" | relURL }}" data-i18n-en="{{ index $i18n "footer_changelog" }}">更新日志</a></li>
           {{/* 静态入口：不依赖 JS，让 /search/ 独立搜索页始终可达（搜索页自身不再重复显示） */}}
           {{ if and .Site.Params.enableSearch (ne .RelPermalink $searchURL) }}
           <li><a href="{{ $searchURL }}" data-i18n-en="{{ index $i18n "footer_search" }}">站内搜索</a></li>
@@ -54,7 +53,7 @@
     </div>
     <div class="footer-bottom">
       <p class="footer-copy">© 2024{{ if ne now.Year 2024 }}–{{ now.Year }}{{ end }} {{ .Site.Title }}</p>
-      <p class="footer-credit"><span data-i18n-en="{{ index $i18n "footer_built_by" }}">技术支持</span> <a href="https://blog.mugee.uk" class="footer-author" target="_blank" rel="noopener">mugee</a></p>
+      <p class="footer-credit"><span data-i18n-en="{{ index $i18n "footer_built_by" }}">技术支持</span> <a href="https://blog.mugee.uk" class="footer-author" target="_blank" rel="noopener">mugee</a><span class="footer-credit-sep"> · </span><a href="{{ "changelog/" | relURL }}" class="footer-author" data-i18n-en="{{ index $i18n "footer_changelog" }}">更新日志</a></p>
     </div>
   </div>
 </footer>
