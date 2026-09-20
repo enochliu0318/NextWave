@@ -1,0 +1,14 @@
+{{ define "main" }}
+{{/* 更新日志页：内容直接取仓库根的 CHANGELOG.md，站点与仓库永远同源，
+     只需维护 CHANGELOG.md 一个文件，无需双份搬运 */}}
+<article class="article-page">
+  <div class="container">
+    <header class="article-header">
+      <h1 class="article-page-title" data-i18n-en="Changelog">{{ .Title }}</h1>
+    </header>
+    <div class="article-content">
+      {{ readFile "CHANGELOG.md" | markdownify }}
+    </div>
+  </div>
+</article>
+{{ end }}

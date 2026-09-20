@@ -41,6 +41,7 @@
         <ul>
           <li><a href="{{ "submit/" | relURL }}" data-i18n-en="{{ index $i18n "nav_submit" }}">投稿</a></li>
           <li><a href="{{ "about/" | relURL }}" data-i18n-en="{{ index $i18n "nav_about" }}">关于</a></li>
+          <li><a href="{{ "changelog/" | relURL }}" data-i18n-en="{{ index $i18n "footer_changelog" }}">更新日志</a></li>
           {{/* 静态入口：不依赖 JS，让 /search/ 独立搜索页始终可达（搜索页自身不再重复显示） */}}
           {{ if and .Site.Params.enableSearch (ne .RelPermalink $searchURL) }}
           <li><a href="{{ $searchURL }}" data-i18n-en="{{ index $i18n "footer_search" }}">站内搜索</a></li>

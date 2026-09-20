@@ -13,7 +13,7 @@
   {{- $backTarget := "" -}}
   {{- if and .Parent .Parent.IsSection -}}
     {{- $backTarget = .Parent.RelPermalink -}}
-  {{- else if or (eq .Kind "section") (in (slice "/about/" "/submit/") .RelPermalink) -}}
+  {{- else if or (eq .Kind "section") (in (slice "/about/" "/submit/" "/changelog/") .RelPermalink) -}}
     {{- /* 注意：新版 Hugo 的 .Path 是源文件路径（/about.md），不能用来匹配页面名，这里用 RelPermalink（与 footer.html 判断搜索页同款写法） */ -}}
     {{- $backTarget = "/" | relURL -}}
   {{- end -}}
