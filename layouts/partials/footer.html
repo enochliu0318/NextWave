@@ -52,7 +52,7 @@
       </nav>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© {{ now.Year }} {{ .Site.Title }}</p>
+      <p class="footer-copy">© 2024{{ if ne now.Year 2024 }}–{{ now.Year }}{{ end }} {{ .Site.Title }}</p>
       <p class="footer-credit"><span data-i18n-en="{{ index $i18n "footer_built_by" }}">技术支持</span> <a href="https://blog.mugee.uk" class="footer-author" target="_blank" rel="noopener">mugee</a></p>
     </div>
   </div>
