@@ -65,3 +65,8 @@ pygmentsUseClasses = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+# 专栏：作品 front matter 里 collections = ["<slug>"] 即归入对应专栏；
+# 专栏中文名与简介在 content/collections/<slug>/_index.md 定义
+[taxonomies]
+  collections = "collections"
