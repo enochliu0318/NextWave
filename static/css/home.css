@@ -36,14 +36,19 @@
 .home-columns.has-collections .recent-main { grid-column: 2; }
 .home-columns.has-collections .article-stats { grid-column: 3; }
 .recent-main { min-width: 0; }
-/* 专栏窗口：与统计卡同壳（卡片+边框+投影），列表链接复用统计卡的交互样式 */
-.collections-card { padding: 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: 0 8px 28px var(--color-shadow); }
-.collections-card h2 { margin: 0; font-size: 1rem; font-weight: 500; }
-.collections-card .stats-sections { margin-top: .5rem; }
+/* 专栏窗口：比统计卡更醒目——主题色渐变卡头 + 专栏名高亮 */
+.collections-card { padding: 0; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: 0 8px 28px var(--color-shadow); overflow: hidden; }
+.collections-card > h2 {
+  margin: 0; padding: .8rem 1.25rem; font-size: 1rem; font-weight: 500; color: #fff;
+  background-image: linear-gradient(135deg, rgba(21, 101, 132, .92), rgba(9, 48, 117, .92));
+  display: flex; align-items: center; gap: .5rem;
+}
+.collections-card > h2 svg { width: 1rem; height: 1rem; flex: none; }
+.collections-card .stats-sections { margin: .4rem .75rem .6rem; }
 /* 专栏条目：名称+描述两行，计数顶部对齐；hover 交互复用统计卡样式 */
 .collections-link { align-items: flex-start; padding-block: .6rem; }
 .collections-link-main { display: flex; flex-direction: column; gap: .25rem; min-width: 0; }
-.collections-link-name { color: var(--color-text); font-size: .9rem; }
+.collections-link-name { color: var(--color-text); font-size: .9rem; font-weight: 500; }
 .collections-link:hover .collections-link-name { color: var(--color-accent); }
 .collections-link-desc { color: var(--color-text-muted); font-size: .75rem; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
 .article-stats { padding: 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: 0 8px 28px var(--color-shadow); }

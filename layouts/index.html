@@ -46,7 +46,10 @@
     {{/* 专栏窗口：数据驱动——作品 front matter 标注 collections 即归入，
          无任何专栏时整卡自动隐藏（栅格随之退回双栏） */}}
     <section class="collections-card" aria-labelledby="collections-title">
-      <h2 id="collections-title" data-i18n-en="Collections">专栏</h2>
+      <h2 id="collections-title" data-i18n-en="Collections">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/></svg>
+        <span>专栏</span>
+      </h2>
       <ul class="stats-sections">
         {{ range .Alphabetical }}
         {{ $name := .Name }}
