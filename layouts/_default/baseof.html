@@ -13,14 +13,14 @@
   {{- $backTarget := "" -}}
   {{- if and .Parent .Parent.IsSection -}}
     {{- $backTarget = .Parent.RelPermalink -}}
+  {{- else if or (eq .Kind "section") (in (slice "taxonomy" "term") .Kind) (in (slice "/about/" "/submit/" "/changelog/") .RelPermalink) -}}
+    {{- /* 注意：新版 Hugo 的 .Path 是源文件路径（/about.md），不能用来匹配页面名，这里用 RelPermalink（与 footer.html 判断搜索页同款写法） */ -}}
+    {{- $backTarget = "/" | relURL -}}
   {{- else if eq .Kind "page" -}}
     {{- /* 专栏独占文章（不在四栏目）：父级不是栏目，返回所属专栏页 */ -}}
     {{- with index (.GetTerms "collections") 0 -}}
       {{- $backTarget = .RelPermalink -}}
     {{- end -}}
-  {{- else if or (eq .Kind "section") (in (slice "taxonomy" "term") .Kind) (in (slice "/about/" "/submit/" "/changelog/") .RelPermalink) -}}
-    {{- /* 注意：新版 Hugo 的 .Path 是源文件路径（/about.md），不能用来匹配页面名，这里用 RelPermalink（与 footer.html 判断搜索页同款写法） */ -}}
-    {{- $backTarget = "/" | relURL -}}
   {{- end -}}
   {{- with $backTarget -}}
   <nav class="back-float-nav" aria-label="返回上级" data-i18n-en-label="Back">
