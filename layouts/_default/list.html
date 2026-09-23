@@ -4,7 +4,7 @@
 {{ $titleI18nKey := index $sectionI18nKeys .Section }}
 <section class="page-header">
   <div class="container">
-    <h1 class="page-title"{{ if $titleI18nKey }} data-i18n-en="{{ index $i18n $titleI18nKey }}"{{ end }}>{{ .Title }}</h1>
+    <h1 class="page-title"{{ if $titleI18nKey }} data-i18n-en="{{ index $i18n $titleI18nKey }}"{{ end }}{{ with .Params.title_en }} data-i18n-en="{{ . }}"{{ end }}>{{ .Title }}</h1>
     {{ with .Content }}
     <div class="page-intro" data-i18n-html-container>
       <div data-i18n-lang="zh">{{ . }}</div>
