@@ -84,11 +84,22 @@
       </div>
     </div>
     <ul class="recent-list">
-      {{ range first 8 $articles.ByDate.Reverse }}
+      {{ range first 8 $allArticles.ByDate.Reverse }}
+      {{/* 专栏独占文章：徽章显示所属专栏名（含 EN），栏目文章显示栏目名 */}}
+      {{ $badgeZh := index $labels .Section }}
+      {{ $badgeEn := "" }}
+      {{ if eq .Section "collections" }}
+        {{ with index (.GetTerms "collections") 0 }}
+          {{ $badgeZh = .Title }}
+          {{ $badgeEn = default .Title .Params.title_en }}
+        {{ end }}
+      {{ else }}
+        {{ $badgeEn = index $i18n (index $sectionI18nKeys .Section) }}
+      {{ end }}
       <li>
         <a href="{{ .RelPermalink }}" class="recent-article">
           <div class="recent-article-top">
-            <span class="recent-section" data-i18n-en="{{ index $i18n (index $sectionI18nKeys .Section) }}">{{ index $labels .Section }}</span>
+            <span class="recent-section" data-i18n-en="{{ $badgeEn }}">{{ $badgeZh }}</span>
             <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>
           </div>
           <h3>{{ .Title }}</h3>
