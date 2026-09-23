@@ -2,7 +2,7 @@
 {{ $searchURL := "/search/" | relURL }}
 {{/* 与首页共用的栏目清单与文案映射 */}}
 {{ $sections := slice "poetry" "prose" "fiction" "non-fiction" }}
-{{ $articles := where .Site.RegularPages "Section" "in" $sections }}
+{{ $articles := where .Site.RegularPages "Section" "in" ($sections | append "collections") }}
 {{ $labels := dict "poetry" "诗歌" "prose" "散文" "fiction" "小说" "non-fiction" "纪实" }}
 {{ $sectionI18nKeys := dict "poetry" "nav_poetry" "prose" "nav_prose" "fiction" "nav_fiction" "non-fiction" "nav_nonfiction" }}
 <footer class="site-footer">

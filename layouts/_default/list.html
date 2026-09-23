@@ -38,6 +38,25 @@
       </li>
       {{ end }}
     </ul>
+    {{ else if eq .Kind "taxonomy" }}
+    {{/* 专栏总览页：列出全部专栏与篇数 */}}
+    <ul class="article-list">
+      {{ range .Data.Terms.ByCount }}
+      <li class="article-item">
+        <a href="{{ .Page.RelPermalink }}" class="article-link">
+          <h2 class="article-title"{{ with .Page.Params.title_en }} data-i18n-en="{{ . }}"{{ end }}>{{ .Page.Title }}</h2>
+          <div class="article-meta">
+            <span class="article-author" data-i18n-en="{{ .Count }} articles">{{ .Count }} 篇</span>
+          </div>
+          {{ with .Page.Params.description_en }}
+          <p class="article-desc" data-i18n-en="{{ . }}">{{ with .Page.Summary }}{{ . | plainify | truncate 120 }}{{ end }}</p>
+          {{ else }}
+          {{ with .Page.Summary }}<p class="article-desc">{{ . | plainify | truncate 120 }}</p>{{ end }}
+          {{ end }}
+        </a>
+      </li>
+      {{ end }}
+    </ul>
     {{ else }}
     <p class="empty-state" data-i18n-en="{{ index $i18n "empty_state" }}">暂无文章，敬请期待。</p>
     {{ end }}

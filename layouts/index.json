@@ -1,9 +1,14 @@
 {{- $pages := where site.RegularPages "RelPermalink" "!=" "/search/" -}}
 {{- $items := slice -}}
 {{- range $p := $pages -}}
-  {{- $section := "" -}}
-  {{- with $p.Parent -}}
-    {{- if eq .Kind "section" }}{{ $section = .Title }}{{ end -}}
+{{- $section := "" -}}
+  {{- if eq $p.Section "collections" -}}
+    {{- /* 专栏独占文章：搜索徽章显示所属专栏名（而非空） */ -}}
+    {{- with index ($p.GetTerms "collections") 0 }}{{ $section = .Title }}{{ end -}}
+  {{- else -}}
+    {{- with $p.Parent -}}
+      {{- if eq .Kind "section" }}{{ $section = .Title }}{{ end -}}
+    {{- end -}}
   {{- end -}}
   {{- $items = $items | append (dict
         "title" $p.Title

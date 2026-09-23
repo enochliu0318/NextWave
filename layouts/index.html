@@ -1,6 +1,9 @@
 {{ define "main" }}
 {{ $i18n := .Site.Data.i18n }}
 {{ $sections := slice "poetry" "prose" "fiction" "non-fiction" }}
+{{ $colOnly := where .Site.RegularPages "Section" "collections" }}
+{{/* 总收录含专栏独占文章（不在四栏目、仅出现在专栏里的作品） */}}
+{{ $allArticles := where .Site.RegularPages "Section" "in" ($sections | append "collections") }}
 {{ $articles := where .Site.RegularPages "Section" "in" $sections }}
 {{ $labels := dict "poetry" "诗歌" "prose" "散文" "fiction" "小说" "non-fiction" "纪实" }}
 {{ $sectionI18nKeys := dict "poetry" "nav_poetry" "prose" "nav_prose" "fiction" "nav_fiction" "non-fiction" "nav_nonfiction" }}
@@ -103,7 +106,7 @@
     </section>
     <aside class="article-stats" aria-labelledby="stats-title">
       <h2 id="stats-title" data-i18n-en="Article statistics">文章统计</h2>
-      <div class="stats-total"><strong>{{ len $articles }}</strong><span data-i18n-en="Articles published">篇文章已收录</span></div>
+      <div class="stats-total"><strong>{{ len $allArticles }}</strong><span data-i18n-en="Articles published">篇文章已收录</span></div>
       <ul class="stats-sections">
         {{ range $sections }}
         {{ $name := . }}
@@ -112,6 +115,16 @@
           <a class="stats-section-link" href="{{ .RelPermalink }}">
             <span data-i18n-en="{{ index $i18n (index $sectionI18nKeys $name) }}">{{ index $labels $name }}</span>
             <span class="stats-section-count">{{ len (where $articles "Section" $name) }}</span>
+          </a>
+        </li>
+        {{ end }}
+        {{ end }}
+        {{ with $colOnly }}
+        {{ with $.Site.GetPage "/collections" }}
+        <li>
+          <a class="stats-section-link" href="{{ .RelPermalink }}">
+            <span data-i18n-en="Collections">专栏</span>
+            <span class="stats-section-count">{{ len $colOnly }}</span>
           </a>
         </li>
         {{ end }}
