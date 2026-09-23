@@ -60,10 +60,10 @@
             <span class="collections-link-main">
               <span class="collections-link-name">{{ $col.Title }}</span>
               {{ with $col.Params.description_en }}
-              {{/* 描述：中文取 _index.md 正文摘要，英文取 description_en，随语言切换 */}}
-              <span class="collections-link-desc" data-i18n-en="{{ . | truncate 48 }}">{{ $col.Summary | plainify | truncate 48 }}</span>
+              {{/* 描述：中文取 _index.md 正文摘要，英文取 description_en，随语言切换；未写描述的专栏不渲染空行 */}}
+              <span class="collections-link-desc" data-i18n-en="{{ . | truncate 48 }}">{{ with $col.Summary }}{{ . | plainify | truncate 48 }}{{ end }}</span>
               {{ else }}
-              <span class="collections-link-desc">{{ $col.Summary | plainify | truncate 48 }}</span>
+              {{ with $col.Summary }}<span class="collections-link-desc">{{ . | plainify | truncate 48 }}</span>{{ end }}
               {{ end }}
             </span>
           </a>
