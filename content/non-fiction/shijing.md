@@ -5,7 +5,6 @@ grade: "G9"
 date: 2026-07-30T08:29:30+08:00
 draft: false
 description: "《诗经》赏析"
-collections: ["shijing"]
 ---
 
 **前言**
