@@ -41,7 +41,36 @@
 </section>
 
 <div class="home-recent">
-  <div class="container home-columns">
+  <div class="container home-columns{{ if .Site.Taxonomies.collections }} has-collections{{ end }}">
+    {{ with .Site.Taxonomies.collections }}
+    {{/* 专栏窗口：数据驱动——作品 front matter 标注 collections 即归入，
+         无任何专栏时整卡自动隐藏（栅格随之退回双栏） */}}
+    <section class="collections-card" aria-labelledby="collections-title">
+      <h2 id="collections-title" data-i18n-en="Collections">专栏</h2>
+      <ul class="stats-sections">
+        {{ range .Alphabetical }}
+        {{ $name := .Name }}
+        {{ with $.Site.GetPage (printf "/collections/%s" $name) }}
+        {{ $col := . }}
+        <li>
+          <a class="stats-section-link collections-link" href="{{ .RelPermalink }}">
+            <span class="collections-link-main">
+              <span class="collections-link-name">{{ $col.Title }}</span>
+              {{ with $col.Params.description_en }}
+              {{/* 描述：中文取 _index.md 正文摘要，英文取 description_en，随语言切换 */}}
+              <span class="collections-link-desc" data-i18n-en="{{ . | truncate 48 }}">{{ $col.Summary | plainify | truncate 48 }}</span>
+              {{ else }}
+              <span class="collections-link-desc">{{ $col.Summary | plainify | truncate 48 }}</span>
+              {{ end }}
+            </span>
+            <span class="stats-section-count">{{ len $col.RegularPages }}</span>
+          </a>
+        </li>
+        {{ end }}
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
     <section class="recent-main" aria-labelledby="recent-title">
     <div class="recent-heading">
       <div>
@@ -70,28 +99,7 @@
       {{ end }}
     </ul>
     </section>
-    <aside class="home-aside">
-      {{ with .Site.Taxonomies.collections }}
-      {{/* 专栏窗口：数据驱动——作品 front matter 标注 collections 即归入，
-           无任何专栏时整卡自动隐藏 */}}
-      <section class="collections-card" aria-labelledby="collections-title">
-        <h2 id="collections-title" data-i18n-en="Collections">专栏</h2>
-        <ul class="stats-sections">
-          {{ range .Alphabetical }}
-          {{ $name := .Name }}
-          {{ with $.Site.GetPage (printf "/collections/%s" $name) }}
-          <li>
-            <a class="stats-section-link" href="{{ .RelPermalink }}">
-              <span>{{ .Title }}</span>
-              <span class="stats-section-count">{{ len .RegularPages }}</span>
-            </a>
-          </li>
-          {{ end }}
-          {{ end }}
-        </ul>
-      </section>
-      {{ end }}
-      <section class="article-stats" aria-labelledby="stats-title">
+    <aside class="article-stats" aria-labelledby="stats-title">
       <h2 id="stats-title" data-i18n-en="Article statistics">文章统计</h2>
       <div class="stats-total"><strong>{{ len $articles }}</strong><span data-i18n-en="Articles published">篇文章已收录</span></div>
       <ul class="stats-sections">
@@ -107,7 +115,6 @@
         {{ end }}
         {{ end }}
       </ul>
-      </section>
     </aside>
   </div>
 </div>
