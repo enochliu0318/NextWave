@@ -39,11 +39,11 @@
 /* 专栏窗口：比统计卡更醒目——主题色渐变卡头 + 专栏名高亮 */
 .collections-card { padding: 0; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: 0 8px 28px var(--color-shadow); overflow: hidden; }
 .collections-card > h2 {
-  margin: 0; padding: .8rem 1.25rem; font-size: 1rem; font-weight: 500; color: #fff;
+  margin: 0; padding: .8rem 1.25rem; font-size: 1.4rem; font-weight: 500; color: #fff;
   background-image: linear-gradient(135deg, rgba(21, 101, 132, .92), rgba(9, 48, 117, .92));
   display: flex; align-items: center; gap: .5rem;
 }
-.collections-card > h2 svg { width: 1rem; height: 1rem; flex: none; }
+.collections-card > h2 svg { width: 1.3rem; height: 1.3rem; flex: none; }
 .collections-card .stats-sections { margin: .4rem .75rem .6rem; }
 /* 专栏条目：名称+描述两行，计数顶部对齐；hover 交互复用统计卡样式 */
 .collections-link { align-items: flex-start; padding-block: .6rem; }
