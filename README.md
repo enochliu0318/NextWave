@@ -13,6 +13,25 @@
 | `content/fiction/` | 小说 |
 | `content/non-fiction/` | 纪实 |
 
+## 专栏
+
+- **机制**：作品 front matter 里加 `collections: ["<slug>"]` 即归入对应专栏（可多选，横跨栏目）；专栏数量、排序、计数全部自动
+- **专栏定义**：`content/collections/<slug>/_index.md`，推荐写法：
+
+  ```yaml
+  ---
+  title: 专栏中文名
+  title_en: English Name
+  description_en: "English description..."
+  ---
+  中文简介正文
+  ```
+
+  中英双语；没有 `_index.md` 时专栏名退化为 slug 首字母大写（如 "Shijing"）
+- **专栏独占文章**：文章可以只标注 `collections` 而不放入任何栏目——放 `content/collections/<slug>/` 目录下即可。此时它出现在首页最近更新（徽章为专栏名）、专栏页、搜索与统计总数，但不计入四个栏目；首页统计卡自动多一行「专栏」合计，无此类文章时自动消失
+- **总览页**：`/collections/` 列出全部专栏与篇数
+- 无任何专栏时，首页专栏卡、总览行等自动隐藏，布局退回双栏
+
 ## 导航与返回
 
 - 导航栏只列栏目与单页：`诗歌 · 散文 · 小说 · 纪实 ┃ 投稿 · 关于`，之后依次是搜索框、语言切换与主题切换

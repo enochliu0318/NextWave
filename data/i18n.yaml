@@ -9,7 +9,6 @@
 # ------------------------------------------------------------
 
 # 导航菜单
-nav_home: "Home"
 nav_poetry: "Poetry"
 nav_prose: "Prose"
 nav_fiction: "Fiction"
@@ -29,8 +28,6 @@ search_clear: "Clear input"
 search_open_page: "Go to search page →"
 
 # 首页 / 列表页
-read_more: "Read more →"
-back_to_prefix: "← Back to "
 empty_state: "No articles yet — stay tuned."
 
 # 页脚
@@ -48,4 +45,3 @@ notice_default_button: "Got it"
 
 # 站点标语 / 简介（首页大标题下方 + 页脚共用）
 site_slogan: "Waves of faith, the voice of youth"
-site_description: "A literary platform for teens — poetry, prose, and fiction that carry the voice of youth."
